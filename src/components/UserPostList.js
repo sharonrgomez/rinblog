@@ -23,7 +23,7 @@ export const UserPostList = (props) => {
                         ) : (
                                 props.posts
                                     .sort((a, b) => a.createdAt < b.createdAt ? 1 : -1)
-                                    .map((post, ind) => <Post key={ind} {...post} />)
+                                    .map((post) => <Post ownsPost={post.author === props.user} key={post.id} {...post} />)
                             )
                     }
                 </div>
@@ -34,7 +34,8 @@ export const UserPostList = (props) => {
 
 const mapStateToProps = (state) => {
     return {
-        posts: state.posts
+        posts: state.posts,
+        user: state.auth.uid
     };
 };
 
