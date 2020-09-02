@@ -10,16 +10,16 @@ const PublicPostList = (props) => {
 
     return (
         <>
-            <div className="page-header">
+            <div>
                 <div className="content-container">
-                    <h1 className="page-header__title">Unleash your mind.</h1>
+                    <span className="ui large header">Dashboard</span>
                 </div>
             </div>
             <div className="content-container">
-                <div className="list-body">
+                <div>
                     {
                         props.posts.length === 0 ? (
-                            <span className="list-item list-item__message">There are no posts.</span>
+                            <span>There are no posts.</span>
                         ) : (
                                 props.posts
                                     .sort((a, b) => a.createdAt < b.createdAt ? 1 : -1)

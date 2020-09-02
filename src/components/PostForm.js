@@ -39,7 +39,7 @@ export default class PostForm extends React.Component {
     render() {
         return (
             <form className="form" onSubmit={this.onSubmit}>
-                {this.state.error && <p className="form__error">{this.state.error}</p>}
+                {this.state.error && <p>{this.state.error}</p>}
                 <div className="field">
                     <input
                         type="text"

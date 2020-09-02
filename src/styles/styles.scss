@@ -7,13 +7,13 @@
 div.ui.inverted.menu {
     .item.desktop {
         display: none;
-        @media (min-width: 500px) {
+        @media (min-width: 550px) {
             display: flex;
         }
     }
     .item.mobile {
         display: flex;
-        @media (min-width: 500px) {
+        @media (min-width: 550px) {
             display: none;
         }
     }
@@ -28,23 +28,26 @@ div.ui.inverted.menu {
     position: absolute;
     top: 48.3px;
     width: 100%;
-    @media (min-width: 500px) {
+    @media (min-width: 450px) {
         display: none;
     }
 }
 
 .content-container {
     margin: 1.5rem auto 0;
-    width: 50%;
+    width: 95%;
+    @media (min-width: 700px) {
+        width: 50%;
+    }
 }
 
 // post form
 
 .ui.main.text.container.clearing.raised.segment {
-    width: 50%;
+    // width: 95%;
     margin: 5em auto 0;
-    @media (min-width: 768px) {
-        width: 45%;
+    @media (min-width: 700px) {
+        width: 50%;
     }
 }
 
@@ -56,4 +59,26 @@ div.ui.inverted.menu {
     .header {
         word-wrap: break-word;
     }
+}
+
+// loader
+
+.loader {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.loader__image {
+    width: 20rem;
+}
+
+
+// post 
+
+.details {
+    display: flex;
+    justify-content: space-between;
 }

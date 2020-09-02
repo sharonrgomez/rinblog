@@ -10,16 +10,16 @@ export const UserPostList = (props) => {
 
     return (
         <>
-            <div className="page-header">
+            <div>
                 <div className="content-container">
-                    <h1 className="page-header__title">Your Posts</h1>
+                    <span className="ui large header">Your Posts</span>
                 </div>
             </div>
             <div className="content-container">
-                <div className="list-body">
+                <div>
                     {
                         props.posts.length === 0 ? (
-                            <span className="list-item list-item__message">You have no posts.</span>
+                            <span>You have no posts.</span>
                         ) : (
                                 props.posts
                                     .sort((a, b) => a.createdAt < b.createdAt ? 1 : -1)

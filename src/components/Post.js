@@ -4,17 +4,17 @@ import { Link } from "react-router-dom";
 
 const Post = ({ title, body, createdAt, id }) => (
     <>
-        <div className='ui main container clearing raised segment'>
+        <div className='ui container clearing raised segment'>
             <div className="ui large header">
                 {title}
             </div>
-            <p className="list-item__subtitle">
+            <p>
                 {body}
             </p>
-            <span className="list-item__subtitle">
+            <div className='details'>
                 {moment(createdAt).format("MMMM Do, YYYY")}
-            </span>
-            <Link className="list-item" to={`/edit/${id}`}>Edit</Link>
+                <Link className='ui teal right floated mini submit button' to={`/edit/${id}`}>Edit</Link>
+            </div>
         </div>
     </>
 );
