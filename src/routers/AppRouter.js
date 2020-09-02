@@ -8,12 +8,14 @@ import EditPostPage from "../components/EditPostPage";
 import NotFoundPage from "../components/NotFoundPage";
 import PrivateRoute from "./PrivateRoute";
 import PublicRoute from "./PublicRoute";
+import Header from '../components/Header';
 
 export const history = createBrowserHistory();
 
 const AppRouter = () => (
     <Router history={history}>
         <>
+            <Header />
             <Switch>
                 <PublicRoute path='/' component={PublicPostList} exact={true} />
                 <PrivateRoute path="/me" component={UserPostList} />

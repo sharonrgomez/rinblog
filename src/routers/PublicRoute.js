@@ -8,7 +8,6 @@ export const PublicRoute = ({
 }) => (
         <Route {...rest} component={(props) => (
             <>
-                <Header />
                 <Component {...props} />
             </>
         )} />
