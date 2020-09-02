@@ -6,12 +6,12 @@ import { startEditPost, startRemovePost } from "../actions/posts";
 export class EditPostPage extends React.Component {
     onSubmit = (post) => {
         this.props.startEditPost(this.props.post.id, post);
-        this.props.history.push("/dashboard");
+        this.props.history.push("/");
     };
 
     onRemove = () => {
         this.props.startRemovePost({ id: this.props.post.id });
-        this.props.history.push("/dashboard");
+        this.props.history.push("/");
     };
 
     render() {

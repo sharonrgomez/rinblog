@@ -6,7 +6,7 @@ import PostForm from "./PostForm";
 export class AddPostPage extends React.Component {
     onSubmit = (post) => {
         this.props.startAddPost(post);
-        this.props.history.push("/dashboard");
+        this.props.history.push("/");
     };
     render() {
         return (

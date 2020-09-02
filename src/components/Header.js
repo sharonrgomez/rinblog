@@ -19,11 +19,12 @@ export const Header = ({ startLogout, startLogin, isAuthenticated }) => {
         <div className='Header'>
             <div className="ui fixed inverted menu">
                 <div className="ui container">
-                    <Link className="header item" to="/dashboard"><h3><i className="leaf icon"></i>.rinblog</h3></Link>
-                    <Link className="item desktop" to="/dashboard">Home</Link>
+                    <Link className="header item" to="/"><h3><i className="leaf icon"></i>.rinblog</h3></Link>
                     {
                         isAuthenticated ? (
                             <>
+                                <Link className="item desktop" to="/">Home</Link>
+                                <Link className="item desktop" to="/me">Username</Link>
                                 <Link className="item desktop" to="/create">Create Post</Link>
                                 <a className="item desktop" onClick={startLogout}>Logout</a>
                             </>

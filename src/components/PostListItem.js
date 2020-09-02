@@ -5,9 +5,9 @@ import { Link } from "react-router-dom";
 const PostListItem = ({ title, body, createdAt, id }) => (
     <>
         <div className='ui main container clearing raised segment'>
-            <h3 className="title">
+            <div className="ui large header">
                 {title}
-            </h3>
+            </div>
             <p className="list-item__subtitle">
                 {body}
             </p>

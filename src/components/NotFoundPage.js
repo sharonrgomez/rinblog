@@ -10,7 +10,7 @@ const NotFoundPage = () => (
         </div>
         <div className="content-container">
             <div className="list-body">
-                <Link to="/dashboard" replace={false} className='list-item__message'>Back to Dashboard</Link>
+                <Link to="/" replace={false} className='list-item__message'>Back to Dashboard</Link>
             </div>
         </div>
     </>

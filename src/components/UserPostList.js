@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import PostListItem from "./PostListItem";
 
-export const PostList = (props) => (
+export const UserPostList = (props) => (
     <>
         <div className="page-header">
             <div className="content-container">
@@ -32,4 +32,4 @@ const mapStateToProps = (state) => {
     };
 };
 
-export default connect(mapStateToProps)(PostList);
+export default connect(mapStateToProps)(UserPostList);

@@ -47,3 +47,13 @@ div.ui.inverted.menu {
         width: 45%;
     }
 }
+
+.ui.raised.segment.container {
+    p {
+        margin: 1em 0 0.5em;
+        word-wrap: break-word;
+    }
+    .header {
+        word-wrap: break-word;
+    }
+}

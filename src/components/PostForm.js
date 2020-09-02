@@ -6,7 +6,7 @@ export default class PostForm extends React.Component {
         this.state = {
             body: props.post ? props.post.body : "",
             title: props.post ? props.post.title : "",
-            createdAt: Date.now(),
+            createdAt: props.post ? props.post.createdAt : Date.now(),
             error: ''
         };
     }
