@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { connect } from "react-redux";
-import { startLogout, startLogin } from "../actions/auth";
 import MobileMenu from './MobileMenu';
+import MenuItems from './MenuItems';
 
-export const Header = ({ startLogout, startLogin, isAuthenticated }) => {
+export const Header = () => {
     const [showMobileMenu, setShowMobileMenu] = useState(false);
 
     const toggleMobileMenu = () => {
@@ -20,19 +19,7 @@ export const Header = ({ startLogout, startLogin, isAuthenticated }) => {
             <div className="ui fixed inverted menu">
                 <div className="ui container">
                     <Link className="header item" to="/"><h3><i className="leaf icon"></i>.rinblog</h3></Link>
-                    {
-                        isAuthenticated ? (
-                            <>
-                                <Link className="item desktop" to="/">Home</Link>
-                                <Link className="item desktop" to="/me">Username</Link>
-                                <Link className="item desktop" to="/create">Create Post</Link>
-                                <a className="item desktop" onClick={startLogout}>Logout</a>
-                            </>
-                        ) : (
-                                <a className='item desktop' onClick={startLogin}>Login</a>
-                            )
-                    }
-                    <a href="https://github.com/shaerins" className='item desktop' target="_blank"><i className="code icon" /></a>
+                    <MenuItems showOnDesktop={true} />
                     <a className='right menu item mobile' onClick={toggleMobileMenu}><i className='bars icon'></i></a>
                 </div>
                 {
@@ -43,13 +30,4 @@ export const Header = ({ startLogout, startLogin, isAuthenticated }) => {
     )
 };
 
-const mapDispatchToProps = (dispatch) => ({
-    startLogout: () => dispatch(startLogout()),
-    startLogin: () => dispatch(startLogin())
-});
-
-const mapStateToProps = (state) => ({
-    isAuthenticated: !!state.auth.uid
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default Header;
