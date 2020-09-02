@@ -2,6 +2,7 @@ import {
     ADD_POST,
     REMOVE_POST,
     SET_POSTS,
+    SET_ALL_POSTS,
     EDIT_POST
 } from '../actions/posts';
 
@@ -28,6 +29,8 @@ const postsReducer = (state = postsReducerDefaultState, action) => {
                 }
             });
         case SET_POSTS:
+            return action.posts;
+        case SET_ALL_POSTS:
             return action.posts;
         default:
             return state;

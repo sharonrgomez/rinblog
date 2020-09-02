@@ -2,7 +2,7 @@ import React from "react";
 import moment from "moment";
 import { Link } from "react-router-dom";
 
-const PostListItem = ({ title, body, createdAt, id }) => (
+const Post = ({ title, body, createdAt, id }) => (
     <>
         <div className='ui main container clearing raised segment'>
             <div className="ui large header">
@@ -19,4 +19,4 @@ const PostListItem = ({ title, body, createdAt, id }) => (
     </>
 );
 
-export default PostListItem;
+export default Post;

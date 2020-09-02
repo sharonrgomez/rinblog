@@ -1,9 +1,10 @@
 import { v4 as uuidv4 } from 'uuid';
-import database from "../firebase/firebase";  
+import database from "../firebase/firebase";
 export const ADD_POST = 'ADD_POST';
 export const REMOVE_POST = 'REMOVE_POST';
 export const EDIT_POST = 'EDIT_POST';
 export const SET_POSTS = 'SET_POSTS';
+export const SET_ALL_POSTS = 'SET_ALL_POSTS'
 
 export const addPost = (post) => ({
     type: ADD_POST,
@@ -75,6 +76,30 @@ export const startSetPosts = () => {
                 });
             });
             dispatch(setPosts(posts));
+        });
+    };
+};
+
+
+export const setAllPosts = (posts) => ({
+    type: SET_ALL_POSTS,
+    posts
+});
+
+export const startSetAllPosts = () => {
+    return (dispatch) => {
+        return database.ref('users').once("value").then((snapshot) => {
+            const posts = [];
+            snapshot.forEach((childSnapshot) => {
+                let userPosts = childSnapshot.val().posts
+                for (const [key, value] of Object.entries(userPosts)) {
+                    posts.push({
+                        id: key,
+                        ...value
+                    });
+                }
+            });
+            dispatch(setAllPosts(posts));
         });
     };
 };
