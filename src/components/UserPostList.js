@@ -10,15 +10,14 @@ export const UserPostList = (props) => (
             </div>
         </div>
         <div className="content-container">
-
             <div className="list-body">
                 {
                     props.posts.length === 0 ? (
                         <span className="list-item list-item__message">You have no posts.</span>
                     ) : (
-                            props.posts.map((post) => {
-                                return <PostListItem key={post.id} {...post} />
-                            })
+                            props.posts
+                                .sort((a, b) => a.createdAt < b.createdAt ? 1 : -1)
+                                .map((post) => <PostListItem key={post.id} {...post} />)
                         )
                 }
             </div>
