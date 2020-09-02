@@ -1,0 +1,49 @@
+// header & hamburger menu
+
+.Header {
+    margin-bottom: 4.5rem;
+}
+
+div.ui.inverted.menu {
+    .item.desktop {
+        display: none;
+        @media (min-width: 500px) {
+            display: flex;
+        }
+    }
+    .item.mobile {
+        display: flex;
+        @media (min-width: 500px) {
+            display: none;
+        }
+    }
+}
+
+.mobile-menu {
+    background: rgb(27, 28, 29);
+    color: rgba(255, 255, 255, 0.9);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    position: absolute;
+    top: 48.3px;
+    width: 100%;
+    @media (min-width: 500px) {
+        display: none;
+    }
+}
+
+.content-container {
+    margin: 1.5rem auto 0;
+    width: 50%;
+}
+
+// post form
+
+.ui.main.text.container.clearing.raised.segment {
+    width: 50%;
+    margin: 5em auto 0;
+    @media (min-width: 768px) {
+        width: 45%;
+    }
+}
