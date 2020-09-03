@@ -41,20 +41,42 @@ div.ui.inverted.menu {
     }
 }
 
-// post form
+// post
 
 .ui.main.text.container.clearing.raised.segment {
-    // width: 95%;
     margin: 5em auto 0;
     @media (min-width: 700px) {
         width: 50%;
     }
 }
 
+.details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .date {
+        color: #7e7e7e;
+    }
+    .links {
+        color: #00b5ad;
+        &:hover {
+            color: #00706b;
+        }
+    }
+}
+
+div .ui.divider {
+    margin: 2rem 0 0.5rem 0;
+}
+// post form
+
 .ui.raised.segment.container {
+    padding-bottom: 0.5rem;
+
     p {
         margin: 1em 0 0.5em;
         word-wrap: break-word;
+        white-space: pre-wrap;
     }
     .header {
         word-wrap: break-word;
@@ -73,12 +95,4 @@ div.ui.inverted.menu {
 
 .loader__image {
     width: 20rem;
-}
-
-
-// post 
-
-.details {
-    display: flex;
-    justify-content: space-between;
 }

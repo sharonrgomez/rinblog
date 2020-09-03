@@ -11,9 +11,10 @@ const Post = ({ title, body, createdAt, id, ownsPost }) => {
             <p>
                 {body}
             </p>
+            <div className='ui divider'></div>
             <div className='details'>
-                {moment(createdAt).format('MMMM Do, YYYY')}
-                {ownsPost && <Link className='ui teal right floated mini submit button' to={`/edit/${id}`}>Edit</Link>}
+                <div className='date'>{moment(createdAt).format('MMMM Do, YYYY')}</div>
+                {ownsPost && <Link to={`/edit/${id}`} className='links'>Edit</Link>}
             </div>
         </div>
     )
