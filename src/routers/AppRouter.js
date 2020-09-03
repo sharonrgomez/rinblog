@@ -16,8 +16,8 @@ const AppRouter = () => (
         <>
             <Header />
             <Switch>
-                <PublicRoute path='/' component={() => <PostList listPage={'Home'} />} exact={true} />
-                <PrivateRoute path='/me' component={() => <PostList listPage={'Your Posts'} />} />
+                <PublicRoute path='/' component={() => <PostList getAllPosts />} exact={true} />
+                <PrivateRoute path='/me' component={() => <PostList />} />
                 <PrivateRoute path='/create' component={AddPostPage} />
                 <PrivateRoute path='/edit/:id' component={EditPostPage} />
                 <Route component={NotFoundPage} />

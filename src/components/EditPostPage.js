@@ -18,9 +18,9 @@ const EditPostPage = ({ startEditPost, startRemovePost, history, post }) => {
         <PostForm
             post={post}
             onSubmit={onSubmit}
-            showRemoveButton={true}
             onRemove={onRemove}
             header='Edit Post'
+            showRemoveButton
         />
     )
 }

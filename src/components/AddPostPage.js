@@ -12,7 +12,6 @@ const AddPostPage = ({ startAddPost, history }) => {
     return (
         <PostForm
             onSubmit={onSubmit}
-            showRemoveButton={false}
             header='Add New Post'
         />
     )

@@ -3,9 +3,9 @@ import { connect } from 'react-redux'
 import Post from './Post'
 import { startSetAllPosts, startSetPosts } from '../actions/posts'
 
-const PostList = ({ startSetAllPosts, startSetPosts, listPage, posts, user }) => {
+const PostList = ({ startSetAllPosts, startSetPosts, getAllPosts, posts, user }) => {
 	useEffect(() => {
-		if (listPage === 'Home') {
+		if (getAllPosts) {
 			startSetAllPosts()
 		} else {
 			startSetPosts()
@@ -16,7 +16,7 @@ const PostList = ({ startSetAllPosts, startSetPosts, listPage, posts, user }) =>
 		<>
 			<div>
 				<div className='content-container'>
-					<span className='ui large header'>{listPage}</span>
+					<span className='ui large header'>{getAllPosts ? 'Home' : 'Your Posts'}</span>
 				</div>
 			</div>
 			<div className='content-container'>
@@ -24,7 +24,7 @@ const PostList = ({ startSetAllPosts, startSetPosts, listPage, posts, user }) =>
 					{posts.length === 0
 						? (
 							<span>
-								{listPage === 'Home' ? 'There are no posts.' : 'You have no posts.'}
+								{getAllPosts ? 'There are no posts.' : 'You have no posts.'}
 							</span>
 						)
 						: (

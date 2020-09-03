@@ -51,16 +51,19 @@ const PostForm = ({ onSubmit, onRemove, post, showRemoveButton, header }) => {
                             </textarea>
                         </div>
                         <div>
+                            <button className='ui teal right floated small submit button' type='submit'>
+                                {showRemoveButton ? 'Update' : 'Add Post'}
+                            </button>
+
                             {showRemoveButton
-                                ? (
-                                    <>
-                                        <button className='ui teal right floated small submit button'>Update</button>
-                                        <button className='ui right floated small button' onClick={onRemove} type='button'>Remove Post</button>
-                                    </>
-                                )
-                                : (
-                                    <button className='ui teal right floated small submit button'>Add Post</button>
-                                )
+                                &&
+                                <button
+                                    className='ui right floated small button'
+                                    onClick={onRemove}
+                                    type='button'
+                                >
+                                    Remove Post
+                                </button>
                             }
                         </div>
                     </form>
