@@ -1,0 +1,57 @@
+import React, { useEffect } from 'react'
+import { connect } from 'react-redux'
+import Post from './Post'
+import { startSetAllPosts, startSetPosts } from '../actions/posts'
+
+const PostList = ({ startSetAllPosts, startSetPosts, listPage, posts, user }) => {
+	useEffect(() => {
+		if (listPage === 'Home') {
+			startSetAllPosts()
+		} else {
+			startSetPosts()
+		}
+	}, [])
+
+	return (
+		<>
+			<div>
+				<div className='content-container'>
+					<span className='ui large header'>{listPage}</span>
+				</div>
+			</div>
+			<div className='content-container'>
+				<div>
+					{posts.length === 0
+						? (
+							<span>
+								{listPage === 'Home' ? 'There are no posts.' : 'You have no posts.'}
+							</span>
+						)
+						: (
+							posts
+								.sort((a, b) => a.createdAt < b.createdAt ? 1 : -1)
+								.map((post) =>
+									<Post
+										ownsPost={post.author === user}
+										key={post.id}
+										{...post}
+									/>)
+						)
+					}
+				</div>
+			</div>
+		</>
+	)
+}
+
+const mapStateToProps = (state) => ({
+	posts: state.posts,
+	user: state.auth.uid
+})
+
+const mapDispatchToProps = (dispatch) => ({
+	startSetAllPosts: () => dispatch(startSetAllPosts()),
+	startSetPosts: () => dispatch(startSetPosts())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(PostList)

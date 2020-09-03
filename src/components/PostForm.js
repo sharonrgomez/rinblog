@@ -69,4 +69,5 @@ const PostForm = ({ onSubmit, onRemove, post, showRemoveButton, header }) => {
         </div>
     )
 }
+
 export default PostForm

@@ -1,8 +1,7 @@
 import React from 'react'
 import { Router, Route, Switch } from 'react-router-dom'
 import { createBrowserHistory } from 'history'
-import PublicPostList from '../components/PublicPostList'
-import UserPostList from '../components/UserPostList'
+import PostList from '../components/PostList'
 import AddPostPage from '../components/AddPostPage'
 import EditPostPage from '../components/EditPostPage'
 import NotFoundPage from '../components/NotFoundPage'
@@ -17,8 +16,8 @@ const AppRouter = () => (
         <>
             <Header />
             <Switch>
-                <PublicRoute path='/' component={PublicPostList} exact={true} />
-                <PrivateRoute path='/me' component={UserPostList} />
+                <PublicRoute path='/' component={() => <PostList listPage={'Home'} />} exact={true} />
+                <PrivateRoute path='/me' component={() => <PostList listPage={'Your Posts'} />} />
                 <PrivateRoute path='/create' component={AddPostPage} />
                 <PrivateRoute path='/edit/:id' component={EditPostPage} />
                 <Route component={NotFoundPage} />
