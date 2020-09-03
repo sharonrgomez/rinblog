@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import moment from 'moment'
+import { formatDistanceStrict } from 'date-fns'
 
 const Post = ({ title, body, createdAt, id, ownsPost }) => {
     return (
@@ -13,7 +13,7 @@ const Post = ({ title, body, createdAt, id, ownsPost }) => {
             </p>
             <div className='ui divider'></div>
             <div className='details'>
-                <div className='date'>{moment(createdAt).format('MMMM Do, YYYY')}</div>
+                <div className='date'>{formatDistanceStrict(createdAt, Date.now())} ago</div>
                 {ownsPost && <Link to={`/edit/${id}`} className='links'>Edit</Link>}
             </div>
         </div>

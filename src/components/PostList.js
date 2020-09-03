@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
+import { compareDesc } from 'date-fns'
 import Post from './Post'
 import { startSetAllPosts, startSetPosts } from '../actions/posts'
 
@@ -29,7 +30,7 @@ const PostList = ({ startSetAllPosts, startSetPosts, getAllPosts, posts, user })
 						)
 						: (
 							posts
-								.sort((a, b) => a.createdAt < b.createdAt ? 1 : -1)
+								.sort((a, b) => compareDesc(a.createdAt, b.createdAt))
 								.map((post) =>
 									<Post
 										ownsPost={post.author === user}
