@@ -15,19 +15,13 @@ const EditPostPage = ({ startEditPost, startRemovePost, history, post }) => {
     }
 
     return (
-        <div className='content-container'>
-            <div className='ui container clearing raised segment'>
-                <div className='ui large header'>Edit Post</div>
-                <div className='ui form container'>
-                    <PostForm
-                        post={post}
-                        onSubmit={onSubmit}
-                        showRemoveButton={true}
-                        onRemove={onRemove}
-                    />
-                </div>
-            </div>
-        </div>
+        <PostForm
+            post={post}
+            onSubmit={onSubmit}
+            showRemoveButton={true}
+            onRemove={onRemove}
+            header='Edit Post'
+        />
     )
 }
 

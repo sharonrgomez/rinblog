@@ -68,6 +68,7 @@ div.ui.inverted.menu {
 div .ui.divider {
     margin: 2rem 0 0.5rem 0;
 }
+
 // post form
 
 .ui.raised.segment.container {
@@ -81,6 +82,14 @@ div .ui.divider {
     .header {
         word-wrap: break-word;
     }
+
+    &:last-child{
+        margin-bottom: 1.5rem;
+    }
+}
+
+.post-form {
+    margin-top: 6rem;
 }
 
 // loader

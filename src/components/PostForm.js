@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-const PostForm = ({ onSubmit, onRemove, post, showRemoveButton }) => {
+const PostForm = ({ onSubmit, onRemove, post, showRemoveButton, header }) => {
     const [body, setBody] = useState(post ? post.body : '')
     const [title, setTitle] = useState(post ? post.title : '')
     const [createdAt, setCreatedAt] = useState(post ? post.createdAt : Date.now())
@@ -26,40 +26,47 @@ const PostForm = ({ onSubmit, onRemove, post, showRemoveButton }) => {
     }
 
     return (
-        <form className='form' onSubmit={handleSubmit}>
-            {error && <p>{error}</p>}
-            <div className='field'>
-                <input
-                    type='text'
-                    placeholder='title'
-                    value={title}
-                    onChange={onTitleChange}
-                    autoFocus
-                />
+        <div className='content-container post-form'>
+            <div className='ui container clearing raised segment'>
+                <div className='ui large header'>{header}</div>
+                <div className='ui form container'>
+                    <form className='form' onSubmit={handleSubmit}>
+                        {error && <p>{error}</p>}
+                        <div className='field'>
+                            <input
+                                type='text'
+                                placeholder='title'
+                                value={title}
+                                onChange={onTitleChange}
+                                autoFocus
+                            />
+                        </div>
+                        <div className='field'>
+                            <textarea
+                                placeholder='body'
+                                cols='30'
+                                rows='15'
+                                value={body}
+                                onChange={onBodyChange}>
+                            </textarea>
+                        </div>
+                        <div>
+                            {showRemoveButton
+                                ? (
+                                    <>
+                                        <button className='ui teal right floated small submit button'>Update</button>
+                                        <button className='ui right floated small button' onClick={onRemove} type='button'>Remove Post</button>
+                                    </>
+                                )
+                                : (
+                                    <button className='ui teal right floated small submit button'>Add Post</button>
+                                )
+                            }
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div className='field'>
-                <textarea
-                    placeholder='body'
-                    cols='30'
-                    rows='15'
-                    value={body}
-                    onChange={onBodyChange}>
-                </textarea>
-            </div>
-            <div>
-                {showRemoveButton
-                    ? (
-                        <>
-                            <button className='ui teal right floated small submit button'>Update</button>
-                            <button className='ui right floated small button' onClick={onRemove} type='button'>Remove Post</button>
-                        </>
-                    )
-                    : (
-                        <button className='ui teal right floated small submit button'>Add Post</button>
-                    )
-                }
-            </div>
-        </form>
+        </div>
     )
 }
 export default PostForm

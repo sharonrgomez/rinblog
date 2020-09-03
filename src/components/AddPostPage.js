@@ -10,14 +10,11 @@ const AddPostPage = ({ startAddPost, history }) => {
     }
 
     return (
-        <div className='content-container'>
-            <div className='ui container clearing raised segment'>
-                <div className='ui large header'>Add New Post</div>
-                <div className='ui form container'>
-                    <PostForm onSubmit={onSubmit} showRemoveButton={false} />
-                </div>
-            </div>
-        </div>
+        <PostForm
+            onSubmit={onSubmit}
+            showRemoveButton={false}
+            header='Add New Post'
+        />
     )
 }
 
