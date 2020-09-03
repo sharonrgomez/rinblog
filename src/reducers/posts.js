@@ -4,9 +4,9 @@ import {
     SET_POSTS,
     SET_ALL_POSTS,
     EDIT_POST
-} from '../actions/posts';
+} from '../actions/posts'
 
-const postsReducerDefaultState = [];
+const postsReducerDefaultState = []
 
 const postsReducer = (state = postsReducerDefaultState, action) => {
     switch (action.type) {
@@ -14,9 +14,9 @@ const postsReducer = (state = postsReducerDefaultState, action) => {
             return [
                 ...state,
                 action.post
-            ];
+            ]
         case REMOVE_POST:
-            return state.filter(({ id }) => id !== action.id);
+            return state.filter(({ id }) => id !== action.id)
         case EDIT_POST:
             return state.map((post) => {
                 if (post.id === action.id) {
@@ -25,16 +25,15 @@ const postsReducer = (state = postsReducerDefaultState, action) => {
                         ...action.updates
                     }
                 } else {
-                    return post;
+                    return post
                 }
-            });
+            })
         case SET_POSTS:
-            return action.posts;
         case SET_ALL_POSTS:
-            return action.posts;
+            return action.posts
         default:
-            return state;
+            return state
     }
-};
+}
 
-export default postsReducer;
+export default postsReducer

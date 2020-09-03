@@ -1,30 +1,31 @@
-import React, { useEffect } from "react";
-import { connect } from "react-redux";
-import Post from "./Post";
-import { startSetPosts } from '../actions/posts';
+import React, { useEffect } from 'react'
+import { connect } from 'react-redux'
+import Post from './Post'
+import { startSetPosts } from '../actions/posts'
 
-export const UserPostList = (props) => {
+const UserPostList = ({ startSetPosts, posts, user }) => {
     useEffect(() => {
-        props.startSetPosts()
-    }, []);
+        startSetPosts()
+    }, [])
 
     return (
         <>
             <div>
-                <div className="content-container">
-                    <span className="ui large header">Your Posts</span>
+                <div className='content-container'>
+                    <span className='ui large header'>Your Posts</span>
                 </div>
             </div>
-            <div className="content-container">
+            <div className='content-container'>
                 <div>
-                    {
-                        props.posts.length === 0 ? (
+                    {posts.length === 0
+                        ? (
                             <span>You have no posts.</span>
-                        ) : (
-                                props.posts
-                                    .sort((a, b) => a.createdAt < b.createdAt ? 1 : -1)
-                                    .map((post) => <Post ownsPost={post.author === props.user} key={post.id} {...post} />)
-                            )
+                        )
+                        : (
+                            posts
+                                .sort((a, b) => a.createdAt < b.createdAt ? 1 : -1)
+                                .map((post) => <Post ownsPost={post.author === user} key={post.id} {...post} />)
+                        )
                     }
                 </div>
             </div>
@@ -32,17 +33,14 @@ export const UserPostList = (props) => {
     )
 }
 
-const mapStateToProps = (state) => {
-    return {
-        posts: state.posts,
-        user: state.auth.uid
-    };
-};
-
+const mapStateToProps = (state) => ({
+    posts: state.posts,
+    user: state.auth.uid
+})
 
 const mapDispatchToProps = (dispatch) => ({
     startSetPosts: () => dispatch(startSetPosts())
-});
+})
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserPostList);
+export default connect(mapStateToProps, mapDispatchToProps)(UserPostList)

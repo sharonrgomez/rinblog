@@ -17,14 +17,15 @@ const PublicPostList = ({ startSetAllPosts, posts, user }) => {
             </div>
             <div className='content-container'>
                 <div>
-                    {
-                        posts.length === 0 ? (
+                    {posts.length === 0
+                        ? (
                             <span>There are no posts.</span>
-                        ) : (
-                                posts
-                                    .sort((a, b) => a.createdAt < b.createdAt ? 1 : -1)
-                                    .map((post) => <Post ownsPost={post.author === user} key={post.id} {...post} />)
-                            )
+                        )
+                        : (
+                            posts
+                                .sort((a, b) => a.createdAt < b.createdAt ? 1 : -1)
+                                .map((post) => <Post ownsPost={post.author === user} key={post.id} {...post} />)
+                        )
                     }
                 </div>
             </div>
@@ -32,16 +33,13 @@ const PublicPostList = ({ startSetAllPosts, posts, user }) => {
     )
 }
 
-const mapStateToProps = (state) => {
-    return {
-        posts: state.posts,
-        user: state.auth.uid
-    }
-}
+const mapStateToProps = (state) => ({
+    posts: state.posts,
+    user: state.auth.uid
+})
 
 const mapDispatchToProps = (dispatch) => ({
     startSetAllPosts: () => dispatch(startSetAllPosts())
 })
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(PublicPostList)
