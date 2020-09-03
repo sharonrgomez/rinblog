@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { startLogout, startLogin } from "../actions/auth";
 
 const MenuItems = ({ isAuthenticated, startLogin, startLogout, showOnDesktop }) => {
-    let itemClass = showOnDesktop ? 'item desktop' : 'item'
+    const itemClass = showOnDesktop ? 'item desktop' : 'item'
 
     return (
         <>
@@ -13,7 +13,7 @@ const MenuItems = ({ isAuthenticated, startLogin, startLogout, showOnDesktop }) 
                     ? (
                         <>
                             <Link className={itemClass} to="/">Home</Link>
-                            <Link className={itemClass} to="/me">Username</Link>
+                            <Link className={itemClass} to="/me">Your Posts</Link>
                             <Link className={itemClass} to="/create">Create Post</Link>
                             <a className={itemClass} onClick={startLogout}>Logout</a>
                         </>

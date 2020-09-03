@@ -5,7 +5,7 @@ export const PublicRoute = ({
     component: Component,
     ...rest
 }) => (
-        <Route {...rest} component={(props) => (
+        <Route {...rest}  component={(props) => (
             <>
                 <Component {...props} />
             </>

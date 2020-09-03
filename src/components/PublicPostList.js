@@ -1,29 +1,29 @@
-import React, { useEffect } from "react";
-import { connect } from "react-redux";
-import Post from "./Post";
+import React, { useEffect } from 'react'
+import { connect } from 'react-redux'
+import Post from './Post'
 import { startSetAllPosts } from '../actions/posts'
 
-const PublicPostList = (props) => {
+const PublicPostList = ({ startSetAllPosts, posts, user }) => {
     useEffect(() => {
-        props.startSetAllPosts()
-    }, []);
+        startSetAllPosts()
+    }, [])
 
     return (
         <>
             <div>
-                <div className="content-container">
-                    <span className="ui large header">Dashboard</span>
+                <div className='content-container'>
+                    <span className='ui large header'>Home</span>
                 </div>
             </div>
-            <div className="content-container">
+            <div className='content-container'>
                 <div>
                     {
-                        props.posts.length === 0 ? (
+                        posts.length === 0 ? (
                             <span>There are no posts.</span>
                         ) : (
-                                props.posts
+                                posts
                                     .sort((a, b) => a.createdAt < b.createdAt ? 1 : -1)
-                                    .map((post) => <Post ownsPost={post.author === props.user} key={post.id} {...post} />)
+                                    .map((post) => <Post ownsPost={post.author === user} key={post.id} {...post} />)
                             )
                     }
                 </div>
@@ -36,12 +36,12 @@ const mapStateToProps = (state) => {
     return {
         posts: state.posts,
         user: state.auth.uid
-    };
-};
+    }
+}
 
 const mapDispatchToProps = (dispatch) => ({
     startSetAllPosts: () => dispatch(startSetAllPosts())
-});
+})
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(PublicPostList);
+export default connect(mapStateToProps, mapDispatchToProps)(PublicPostList)

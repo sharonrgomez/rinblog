@@ -9,7 +9,6 @@ import { firebase } from "./firebase/firebase";
 import LoadingPage from "./components/LoadingPage";
 import "./styles/styles.scss";
 
-
 const store = configureStore();
 
 const jsx = (
@@ -31,11 +30,11 @@ ReactDOM.render(<LoadingPage />, document.getElementById("app"));
 firebase.auth().onAuthStateChanged((user) => {
     if (user) {
         store.dispatch(login(user.uid));
-        renderApp();
-        history.push("/");
     } else {
         store.dispatch(logout());
-        renderApp();
+    }
+    if (history.location.pathname === "/") {
         history.push("/");
     }
+    renderApp();
 });
