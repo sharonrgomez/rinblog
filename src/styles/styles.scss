@@ -37,7 +37,10 @@ div.ui.inverted.menu {
     margin: 1.5rem auto 0;
     width: 95%;
     @media (min-width: 700px) {
-        width: 50%;
+        width: 60%;
+    }
+    @media (min-width: 1000px) {
+        width: 45%;
     }
 }
 
@@ -72,9 +75,7 @@ div .ui.divider {
 // post form
 
 .ui.raised.segment.container {
-    padding-bottom: 0.5rem;
-
-    p {
+    .post-body {
         margin: 1em 0 0.5em;
         word-wrap: break-word;
         white-space: pre-wrap;
@@ -83,8 +84,11 @@ div .ui.divider {
         word-wrap: break-word;
     }
 
-    &:last-child{
+    &:last-child {
         margin-bottom: 1.5rem;
+    }
+    &.post-list__post {
+        padding-bottom: 0.5rem;
     }
 }
 
@@ -104,4 +108,30 @@ div .ui.divider {
 
 .loader__image {
     width: 20rem;
+}
+
+// user form
+
+.user-form {
+    margin: 6rem auto 0;
+    width: 95%;
+    @media (min-width: 450px) {
+        width: 70%;
+    }
+    @media (min-width: 700px) {
+        width: 40%;
+    }
+    @media (min-width: 1000px) {
+        width: 30%;
+    }
+    .ui.divider {
+        margin-top: 0.5rem;
+    }
+}
+
+// error messages
+
+.error-message {
+    color: #ff0000;
+    margin: 0 0 1rem 0;
 }

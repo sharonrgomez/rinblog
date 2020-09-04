@@ -18,7 +18,10 @@ const MenuItems = ({ isAuthenticated, startLogin, startLogout, showOnDesktop }) 
                     </>
                 )
                 : (
-                    <a className={itemClass} onClick={startLogin}>Login</a>
+                    <>
+                        <Link className={itemClass} to='/signup'>Sign Up</Link>
+                        <Link className={itemClass} to='/login'>Login</Link>
+                    </>
                 )
             }
             <a href='https://github.com/shaerins' className={itemClass} target='_blank'>

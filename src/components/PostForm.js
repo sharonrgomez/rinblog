@@ -31,7 +31,7 @@ const PostForm = ({ onSubmit, onRemove, post, showRemoveButton, header }) => {
                 <div className='ui large header'>{header}</div>
                 <div className='ui form container'>
                     <form className='form' onSubmit={handleSubmit}>
-                        {error && <p>{error}</p>}
+                        {error && <p className='error-message'>{error}</p>}
                         <div className='field'>
                             <input
                                 type='text'

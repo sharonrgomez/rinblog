@@ -4,11 +4,11 @@ import { formatDistanceStrict } from 'date-fns'
 
 const Post = ({ title, body, createdAt, id, ownsPost }) => {
     return (
-        <div className='ui container clearing raised segment'>
+        <div className='ui container clearing raised segment post-list__post'>
             <div className='ui large header'>
                 {title}
             </div>
-            <p>
+            <p className='post-body'>
                 {body}
             </p>
             <div className='ui divider'></div>
