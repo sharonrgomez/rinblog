@@ -1,9 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { startLogout, startLogin } from '../actions/auth'
+import { startLogout } from '../actions/auth'
 
-const MenuItems = ({ isAuthenticated, startLogin, startLogout, showOnDesktop }) => {
+const MenuItems = ({ isAuthenticated, startLogout, showOnDesktop }) => {
     const itemClass = showOnDesktop ? 'item desktop' : 'item'
 
     return (
@@ -32,8 +32,7 @@ const MenuItems = ({ isAuthenticated, startLogin, startLogout, showOnDesktop }) 
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    startLogout: () => dispatch(startLogout()),
-    startLogin: () => dispatch(startLogin())
+    startLogout: () => dispatch(startLogout())
 })
 
 const mapStateToProps = (state) => ({

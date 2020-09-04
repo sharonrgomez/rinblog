@@ -92,11 +92,13 @@ export const startSetAllPosts = () => {
             const posts = []
             snapshot.forEach((childSnapshot) => {
                 let userPosts = childSnapshot.val().posts
-                for (const [key, value] of Object.entries(userPosts)) {
-                    posts.push({
-                        id: key,
-                        ...value
-                    })
+                if (userPosts) {
+                    for (const [key, value] of Object.entries(userPosts)) {
+                        posts.push({
+                            id: key,
+                            ...value
+                        })
+                    }
                 }
             })
             dispatch(setAllPosts(posts))

@@ -13,21 +13,6 @@ export const startLogin = () => {
     }
 }
 
-// export const signUp = (uid, pw) => ({
-//     type: 'SIGN_UP',
-//     uid,
-//     pw
-// })
-
-// export const startSignUp = () => {
-//     return () => {
-//         return firebase
-//             .auth()
-//             .createUserWithEmailAndPassword(email, password)
-//     }
-// }
-
-
 export const logout = () => ({
     type: 'LOGOUT'
 })
