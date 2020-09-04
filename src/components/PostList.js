@@ -35,6 +35,7 @@ const PostList = ({ startSetAllPosts, startSetPosts, getAllPosts, posts, user })
 									<Post
 										ownsPost={post.author === user}
 										key={post.id}
+										user={post.author}
 										{...post}
 									/>)
 						)

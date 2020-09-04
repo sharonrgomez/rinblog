@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { firebase } from '../firebase/firebase'
 import { startLogin } from '../actions/auth'
 
-
 const UserForm = ({ title, startLogin }) => {
 	const [email, setEmail] = useState('')
 	const [username, setUsername] = useState('')
@@ -18,7 +17,7 @@ const UserForm = ({ title, startLogin }) => {
 			.then((res) => {
 				firebase.database().ref('users/' + res.user.uid + '/user_info').set({
 					display_name: username
-				});
+				})
 			})
 			.catch((e) => {
 				setError(e.message)
@@ -67,16 +66,18 @@ const UserForm = ({ title, startLogin }) => {
 								/>
 							</div>
 
-							<div className='field'>
-								<input
-									value={username}
-									onChange={onUsernameChange}
-									name='username'
-									type='text'
-									placeholder='username'
-									autoComplete="off"
-								/>
-							</div>
+							{title === 'Sign Up' &&
+								<div className='field'>
+									<input
+										value={username}
+										onChange={onUsernameChange}
+										name='username'
+										type='text'
+										placeholder='username'
+										autoComplete="off"
+									/>
+								</div>
+							}
 
 							<div className='field'>
 								<input
