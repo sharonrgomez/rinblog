@@ -8,7 +8,7 @@ const Header = () => {
     const menuIcon = !showMobileMenu ? 'bars icon' : 'close icon'
 
     return (
-        <div className='Header'>
+        <nav className='Header'>
             <div className='ui fixed inverted menu'>
                 <div className='ui container'>
                     <Link className='header item' to='/'>
@@ -21,7 +21,7 @@ const Header = () => {
                 </div>
                 {showMobileMenu && <MobileMenu />}
             </div>
-        </div>
+        </nav>
     )
 }
 

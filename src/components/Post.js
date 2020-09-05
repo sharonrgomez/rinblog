@@ -21,7 +21,7 @@ const Post = ({ title, body, createdAt, id, ownsPost, user }) => {
     }, [])
 
     return (
-        <div className='ui container clearing raised segment post-list__post'>
+        <article className='ui container clearing raised segment post-list__post'>
             <div className='ui large header'>
                 {title}
             </div>
@@ -36,7 +36,7 @@ const Post = ({ title, body, createdAt, id, ownsPost, user }) => {
                     : <span>{displayName}</span>
                 }
             </div>
-        </div>
+        </article>
     )
 }
 
