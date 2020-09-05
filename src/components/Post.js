@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { firebase } from '../firebase/firebase'
 import { formatDistanceStrict } from 'date-fns'
 
-const Post = ({ title, body, createdAt, id, ownsPost, user }) => {
+const Post = ({ title, body, createdAt, id, ownsPost, isViewingProfile, user }) => {
     const [displayName, setDisplayName] = useState('')
 
     // get username to be displayed under post
@@ -31,9 +31,12 @@ const Post = ({ title, body, createdAt, id, ownsPost, user }) => {
             <div className='ui divider'></div>
             <div className='details'>
                 <div className='date'>{formatDistanceStrict(createdAt, Date.now())} ago</div>
+                {/* if post belongs to current user, show edit link.
+                if not, show username. 
+                on profile pages, do not show either. */}
                 {ownsPost
                     ? <Link to={`/edit/${id}`} className='links'>Edit</Link>
-                    : <span>{displayName}</span>
+                    : !isViewingProfile && <Link to={`/user/${user}`} className='links'>{displayName}</Link>
                 }
             </div>
         </article>

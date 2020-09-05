@@ -20,6 +20,7 @@ const AppRouter = () => (
                 <PublicRoute path='/' component={() => <PostList getAllPosts />} exact={true} />
                 <PublicRoute path='/signup' component={() => <UserForm title='Sign Up' />} />
                 <PublicRoute path='/login' component={() => <UserForm title='Login' />} />
+                <PublicRoute path='/user/:id' component={(props) => <PostList getUserPosts={true} {...props} />} />
                 <PrivateRoute path='/me' component={() => <PostList />} />
                 <PrivateRoute path='/create' component={AddPostPage} />
                 <PrivateRoute path='/edit/:id' component={EditPostPage} />

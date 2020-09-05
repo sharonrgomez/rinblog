@@ -64,9 +64,8 @@ export const setPosts = (posts) => ({
     posts
 })
 
-export const startSetPosts = () => {
-    return (dispatch, getState) => {
-        const uid = getState().auth.uid
+export const startSetPosts = (uid) => {
+    return (dispatch) => {
         return database.ref(`users/${uid}/posts`).once('value').then((snapshot) => {
             const posts = []
             snapshot.forEach((childSnapshot) => {
@@ -79,7 +78,6 @@ export const startSetPosts = () => {
         })
     }
 }
-
 
 export const setAllPosts = (posts) => ({
     type: SET_ALL_POSTS,

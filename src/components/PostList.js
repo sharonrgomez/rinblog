@@ -1,16 +1,28 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
+import { firebase } from '../firebase/firebase'
 import { compareDesc } from 'date-fns'
 import Post from './Post'
 import { startSetAllPosts, startSetPosts } from '../actions/posts'
 
-const PostList = ({ startSetAllPosts, startSetPosts, getAllPosts, posts, user }) => {
+const PostList = ({ startSetAllPosts, startSetPosts, getAllPosts, getUserPosts, posts, user, match }) => {
+	const [displayName, setDisplayName] = useState('')
+
 	useEffect(() => {
 		// display all posts on home pg, display only user's posts on profile pg
 		if (getAllPosts) {
 			startSetAllPosts()
+		} else if (getUserPosts) {
+			const userId = match.params.id
+			startSetPosts(userId)
+			firebase
+				.database()
+				.ref('users/' + userId + '/user_info')
+				.on('value', (snapshot) => {
+					setDisplayName(snapshot.val().display_name)
+				})
 		} else {
-			startSetPosts()
+			startSetPosts(user)
 		}
 	}, [])
 
@@ -18,7 +30,15 @@ const PostList = ({ startSetAllPosts, startSetPosts, getAllPosts, posts, user })
 		<>
 			<div>
 				<div className='content-container'>
-					<span className='ui large header'>{getAllPosts ? 'Home' : 'Your Posts'}</span>
+					<span className='ui large header'>
+						{
+							getAllPosts
+								? 'Home'
+								: getUserPosts
+									? displayName
+									: 'Your Posts'
+						}
+					</span>
 				</div>
 			</div>
 			<div className='content-container'>
@@ -26,7 +46,7 @@ const PostList = ({ startSetAllPosts, startSetPosts, getAllPosts, posts, user })
 					{posts.length === 0
 						? (
 							<span>
-								{getAllPosts ? 'There are no posts.' : 'You have no posts.'}
+								{getAllPosts || getUserPosts ? 'There are no posts.' : 'You have no posts.'}
 							</span>
 						)
 						: (
@@ -37,6 +57,7 @@ const PostList = ({ startSetAllPosts, startSetPosts, getAllPosts, posts, user })
 										ownsPost={post.author === user}
 										key={post.id}
 										user={post.author}
+										isViewingProfile={getUserPosts}
 										{...post}
 									/>)
 						)
@@ -54,7 +75,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
 	startSetAllPosts: () => dispatch(startSetAllPosts()),
-	startSetPosts: () => dispatch(startSetPosts())
+	startSetPosts: (user) => dispatch(startSetPosts(user))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostList)
