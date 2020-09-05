@@ -5,13 +5,19 @@ import { formatDistanceStrict } from 'date-fns'
 
 const Post = ({ title, body, createdAt, id, ownsPost, user }) => {
     const [displayName, setDisplayName] = useState('')
+
+    // get username to be displayed under post
     useEffect(() => {
-        firebase
-            .database()
-            .ref(`users/${user}`)
-            .on('value', (snapshot) => {
-                setDisplayName(snapshot.val().user_info.display_name)
-            })
+        let mounted = true
+        if (mounted) {
+            firebase
+                .database()
+                .ref(`users/${user}`)
+                .on('value', (snapshot) => {
+                    setDisplayName(snapshot.val().user_info.display_name)
+                })
+        }
+        return () => mounted = false
     }, [])
 
     return (

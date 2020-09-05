@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 
 const PostForm = ({ onSubmit, onRemove, post, showRemoveButton, header }) => {
-    const [body, setBody] = useState(post ? post.body : '')
-    const [title, setTitle] = useState(post ? post.title : '')
-    const [createdAt, setCreatedAt] = useState(post ? post.createdAt : Date.now())
     const [error, setError] = useState('')
+    const [title, setTitle] = useState(post ? post.title : '')
+    const [body, setBody] = useState(post ? post.body : '')
+    const createdAt = post ? post.createdAt : Date.now()
 
     const onBodyChange = (e) => {
         setBody(e.target.value)

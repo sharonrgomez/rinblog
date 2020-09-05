@@ -17,6 +17,7 @@ const jsx = (
     </Provider>
 )
 
+// show loading image if app not loaded yet
 let hasRendered = false
 const renderApp = () => {
     if (!hasRendered) {

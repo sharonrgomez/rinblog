@@ -6,6 +6,7 @@ import { startSetAllPosts, startSetPosts } from '../actions/posts'
 
 const PostList = ({ startSetAllPosts, startSetPosts, getAllPosts, posts, user }) => {
 	useEffect(() => {
+		// display all posts on home pg, display only user's posts on profile pg
 		if (getAllPosts) {
 			startSetAllPosts()
 		} else {
