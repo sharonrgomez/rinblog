@@ -28,31 +28,35 @@ const UserForm = ({ title, startLogin }) => {
 
 	const handleSignUp = (e) => {
 		e.preventDefault()
-		// first get users from db
-		firebase
-			.database()
-			.ref('users/')
-			.on('value', (snapshot) => {
-				// if there's users in db, loop through them
-				if (snapshot.val()) {
-					let hasMatch = false
-					// loop through each user id
-					for (const [key, value] of Object.entries(snapshot.val())) {
-						let existingName = value.user_info.display_name
-						if (existingName === username) {
-							hasMatch = true
-							break
+		if (username.length > 2) {
+			// first get users from db
+			firebase
+				.database()
+				.ref('users/')
+				.on('value', (snapshot) => {
+					// if there's users in db, loop through them
+					if (snapshot.val()) {
+						let hasMatch = false
+						// loop through each user id
+						for (const [key, value] of Object.entries(snapshot.val())) {
+							let existingName = value.user_info.display_name
+							if (existingName === username) {
+								hasMatch = true
+								break
+							}
 						}
-					}
-					if (!hasMatch) {
-						createUserWithEmail(email, password)
+						if (!hasMatch) {
+							createUserWithEmail(email, password)
+						} else {
+							setError('That username already exists.')
+						}
 					} else {
-						setError('That username already exists.')
+						createUserWithEmail(email, password)
 					}
-				} else {
-					createUserWithEmail(email, password)
-				}
-			})
+				})
+		} else {
+			setError('Username must be greater than 3 characters.')
+		}
 	}
 
 	const handleLogin = (e) => {
@@ -70,7 +74,7 @@ const UserForm = ({ title, startLogin }) => {
 			<div className='user-form'>
 				<div className='ui container clearing raised segment'>
 					<div className='ui large header'>{title}</div>
-					<p className='error-message'>{error}</p>
+					{error && <p className='ui error message'>{error}</p>}
 					<div className='ui form container'>
 						<form
 							autoComplete="off"
@@ -78,31 +82,32 @@ const UserForm = ({ title, startLogin }) => {
 							onSubmit={title === 'Sign Up' ? handleSignUp : handleLogin}
 						>
 
-							<div className='field'>
-								<input
-									value={email}
-									onChange={(e) => setEmail(e.target.value)}
-									name='email'
-									type='email'
-									placeholder='email'
-									autoComplete="off"
-								/>
-							</div>
-
 							{title === 'Sign Up' &&
 								<div className='field'>
+									<label>Username</label>
 									<input
 										value={username}
 										onChange={(e) => setUsername(e.target.value)}
 										name='username'
 										type='text'
 										placeholder='username'
-										autoComplete="off"
 									/>
 								</div>
 							}
 
 							<div className='field'>
+								<label>E-mail</label>
+								<input
+									value={email}
+									onChange={(e) => setEmail(e.target.value)}
+									name='email'
+									type='email'
+									placeholder='email'
+								/>
+							</div>
+
+							<div className='field'>
+								<label>Password</label>
 								<input
 									value={password}
 									onChange={(e) => setPassword(e.target.value)}

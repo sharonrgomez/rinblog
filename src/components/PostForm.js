@@ -18,7 +18,7 @@ const PostForm = ({ onSubmit, onRemove, post, showRemoveButton, header }) => {
         e.preventDefault()
 
         if (!body || !title) {
-            setError('Please provide a title and a body')
+            setError('Please provide a title and a body.')
         } else {
             setError('')
             onSubmit({ body, createdAt, title })
@@ -29,10 +29,11 @@ const PostForm = ({ onSubmit, onRemove, post, showRemoveButton, header }) => {
         <div className='content-container post-form'>
             <div className='ui container clearing raised segment'>
                 <div className='ui large header'>{header}</div>
+                {error && <p className='ui error message'>{error}</p>}
                 <div className='ui form container'>
                     <form className='form' onSubmit={handleSubmit}>
-                        {error && <p className='error-message'>{error}</p>}
                         <div className='field'>
+                            <label>Title</label>
                             <input
                                 type='text'
                                 placeholder='title'
@@ -42,6 +43,7 @@ const PostForm = ({ onSubmit, onRemove, post, showRemoveButton, header }) => {
                             />
                         </div>
                         <div className='field'>
+                            <label>Body</label>
                             <textarea
                                 placeholder='body'
                                 cols='30'
