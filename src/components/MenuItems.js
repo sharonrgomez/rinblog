@@ -1,10 +1,25 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
+import { firebase } from '../firebase/firebase'
 import { startLogout } from '../actions/auth'
 
-const MenuItems = ({ isAuthenticated, startLogout, showOnDesktop }) => {
+const MenuItems = ({ isAuthenticated, startLogout, showOnDesktop, user }) => {
     const itemClass = showOnDesktop ? 'item desktop' : 'item'
+    const [displayName, setDisplayName] = useState('')
+
+    // get username
+    useEffect(() => {
+        if (user) {
+            firebase
+                .database()
+                .ref('users/' + user + '/user_info')
+                .on('value', (snapshot) => {
+                    setDisplayName(snapshot.val().display_name)
+                })
+        }
+    }, [user])
+
 
     return (
         <>
@@ -12,9 +27,9 @@ const MenuItems = ({ isAuthenticated, startLogout, showOnDesktop }) => {
                 ? (
                     <>
                         <Link className={itemClass} to='/'>Home</Link>
-                        <Link className={itemClass} to='/me'>Your Posts</Link>
                         <Link className={itemClass} to='/create'>Create Post</Link>
                         <a className={itemClass} onClick={startLogout}>Logout</a>
+                        <Link className={itemClass} to='/me'>@{displayName}</Link>
                     </>
                 )
                 : (
@@ -36,7 +51,8 @@ const mapDispatchToProps = (dispatch) => ({
 })
 
 const mapStateToProps = (state) => ({
-    isAuthenticated: !!state.auth.uid
+    isAuthenticated: !!state.auth.uid,
+    user: state.auth.uid
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(MenuItems)
