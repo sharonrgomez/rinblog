@@ -11,16 +11,53 @@ const UserForm = ({ title, startLogin }) => {
 
 	const handleSignUp = (e) => {
 		e.preventDefault()
+		// first get users from db
 		firebase
-			.auth()
-			.createUserWithEmailAndPassword(email, password)
-			.then((res) => {
-				firebase.database().ref('users/' + res.user.uid + '/user_info').set({
-					display_name: username
-				})
-			})
-			.catch((e) => {
-				setError(e.message)
+			.database()
+			.ref(`users/`)
+			.on('value', (snapshot) => {
+				// if there's users in db, loop through them
+				if (snapshot.val()) {
+					let hasMatch = false
+					// loop through each user id
+					for (const [key, value] of Object.entries(snapshot.val())) {
+						let existingName = value.user_info.display_name
+						// if current display name === username input, break loop. otherwise there was no match
+						if (existingName === username) {
+							hasMatch = true
+							break
+						}
+					}
+					if (!hasMatch) {
+						firebase
+							.auth()
+							.createUserWithEmailAndPassword(email, password)
+							.then((res) => {
+								firebase.database().ref('users/' + res.user.uid + '/user_info').set({
+									display_name: username
+								})
+							})
+							.catch((e) => {
+								setError(e.message)
+							})
+					} else {
+						console.log('that username exists')
+					}
+
+					// if there's no users in db, no need to loop through
+				} else {
+					firebase
+						.auth()
+						.createUserWithEmailAndPassword(email, password)
+						.then((res) => {
+							firebase.database().ref('users/' + res.user.uid + '/user_info').set({
+								display_name: username
+							})
+						})
+						.catch((e) => {
+							setError(e.message)
+						})
+				}
 			})
 	}
 

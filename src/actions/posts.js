@@ -91,8 +91,9 @@ export const startSetAllPosts = () => {
         return database.ref('users').once('value').then((snapshot) => {
             const posts = []
             snapshot.forEach((childSnapshot) => {
-                let userPosts = childSnapshot.val().posts
-                if (userPosts) {
+                // // if each user has posts
+                if (childSnapshot.val().posts) {
+                    let userPosts = childSnapshot.val().posts
                     for (const [key, value] of Object.entries(userPosts)) {
                         posts.push({
                             id: key,
