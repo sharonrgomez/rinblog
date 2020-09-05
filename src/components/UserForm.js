@@ -41,7 +41,7 @@ const UserForm = ({ title, startLogin }) => {
 								setError(e.message)
 							})
 					} else {
-						console.log('that username exists')
+						setError('That username already exists.')
 					}
 
 					// if there's no users in db, no need to loop through

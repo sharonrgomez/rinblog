@@ -6,7 +6,6 @@ import { startAddPost } from '../actions/posts'
 const AddPostPage = ({ startAddPost, history }) => {
     const onSubmit = (post) => {
         startAddPost(post).then(() => {
-            console.log('worked')
             history.push('/')
         })
     }
