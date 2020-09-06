@@ -2,7 +2,7 @@
 A blogging app that gives you the freedom to unleash your mind.
 **In progress!!**
 
-## View
+## Live Demo
 
 [https://rin-blog.web.app/](https://rin-blog.web.app/)
 
