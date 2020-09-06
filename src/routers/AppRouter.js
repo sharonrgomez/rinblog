@@ -9,6 +9,7 @@ import NotFoundPage from '../components/NotFoundPage'
 import PrivateRoute from './PrivateRoute'
 import PublicRoute from './PublicRoute'
 import Header from '../components/Header'
+import ScrollToTopOnPageChange from '../components/ScrollToTop'
 
 export const history = createBrowserHistory()
 
@@ -16,6 +17,7 @@ const AppRouter = () => (
     <Router history={history}>
         <>
             <Header />
+            <ScrollToTopOnPageChange />
             <Switch>
                 <PublicRoute path='/' component={() => <PostList getAllPosts />} exact={true} />
                 <PublicRoute path='/signup' component={() => <UserForm title='Sign Up' />} />

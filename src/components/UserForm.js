@@ -90,7 +90,6 @@ const UserForm = ({ title, startLogin }) => {
 										onChange={(e) => setUsername(e.target.value)}
 										name='username'
 										type='text'
-										placeholder='username'
 									/>
 								</div>
 							}
@@ -102,7 +101,6 @@ const UserForm = ({ title, startLogin }) => {
 									onChange={(e) => setEmail(e.target.value)}
 									name='email'
 									type='email'
-									placeholder='email'
 								/>
 							</div>
 
@@ -113,7 +111,6 @@ const UserForm = ({ title, startLogin }) => {
 									onChange={(e) => setPassword(e.target.value)}
 									name='password'
 									type='password'
-									placeholder='password'
 								/>
 							</div>
 
@@ -132,7 +129,7 @@ const UserForm = ({ title, startLogin }) => {
 								onClick={startLogin}
 							>
 								<i className="google icon"></i>
-								Login With Google
+								Login with Google
 							</button>
 						</form>
 					</div>

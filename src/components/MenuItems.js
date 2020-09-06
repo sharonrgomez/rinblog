@@ -29,7 +29,7 @@ const MenuItems = ({ isAuthenticated, startLogout, showOnDesktop, user }) => {
                         <Link className={itemClass} to='/'>Home</Link>
                         <Link className={itemClass} to='/create'>Create Post</Link>
                         <a className={itemClass} onClick={startLogout}>Logout</a>
-                        <Link className={itemClass} to='/me'>@{displayName}</Link>
+                        <Link className={itemClass} to='/me'>{displayName}</Link>
                     </>
                 )
                 : (
