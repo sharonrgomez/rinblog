@@ -8,7 +8,8 @@
     "build:prod": "webpack -p --env production",
     "dev-server": "webpack-dev-server",
     "start": "node server/server.js",
-    "heroku-postbuild": "npm run build:prod"
+    "deploy": "yarn run build:prod && firebase deploy"
+
   },
   "author": "Sharon Levin",
   "license": "ISC",

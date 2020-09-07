@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { firebase } from '../firebase/firebase'
 import { startLogout } from '../actions/auth'
 
-const MenuItems = ({ isAuthenticated, startLogout, showOnDesktop, user }) => {
+const MenuItems = ({ isAuthenticated, startLogout, showOnDesktop, user, redirect }) => {
     const itemClass = showOnDesktop ? 'item desktop' : 'item'
     const [displayName, setDisplayName] = useState('')
 
@@ -26,16 +26,16 @@ const MenuItems = ({ isAuthenticated, startLogout, showOnDesktop, user }) => {
             {isAuthenticated
                 ? (
                     <>
-                        <Link className={itemClass} to='/'>Home</Link>
-                        <Link className={itemClass} to='/create'>Create Post</Link>
-                        <a className={itemClass} onClick={startLogout}>Logout</a>
-                        <Link className={itemClass} to='/me'>{displayName}</Link>
+                        <button className={itemClass} onClick={redirect('/')}>Home</button>
+                        <button className={itemClass} onClick={redirect('/create')}>Create Post</button>
+                        <button className={itemClass} onClick={startLogout}>Logout</button>
+                        <button className={itemClass} onClick={redirect('/me')}>{displayName}</button>
                     </>
                 )
                 : (
                     <>
-                        <Link className={itemClass} to='/signup'>Sign Up</Link>
-                        <Link className={itemClass} to='/login'>Login</Link>
+                        <button className={itemClass} onClick={redirect('/signup')}>Sign Up</button>
+                        <button className={itemClass} onClick={redirect('/login')}>Login</button>
                     </>
                 )
             }

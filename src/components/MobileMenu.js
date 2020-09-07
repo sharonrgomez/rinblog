@@ -1,9 +1,9 @@
 import React from 'react'
 import MenuItems from './MenuItems'
 
-const MobileMenu = () => (
+const MobileMenu = ({ redirect }) => (
     <div className='mobile-menu'>
-        <MenuItems showOnDesktop={false} />
+        <MenuItems showOnDesktop={false} redirect={redirect} />
     </div>
 )
 

@@ -16,7 +16,7 @@ export const history = createBrowserHistory()
 const AppRouter = () => (
     <Router history={history}>
         <>
-            <Header />
+            <Header history={history} />
             <ScrollToTopOnPageChange />
             <Switch>
                 <PublicRoute path='/' component={() => <PostList getAllPosts />} exact={true} />
