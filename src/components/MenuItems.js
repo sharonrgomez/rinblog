@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { firebase } from '../firebase/firebase'
 import { startLogout } from '../actions/auth'
@@ -20,6 +19,10 @@ const MenuItems = ({ isAuthenticated, startLogout, showOnDesktop, user, redirect
         }
     }, [user])
 
+    const logoutAndRedirect = () => {
+        startLogout()
+        redirect('/')()
+    }
 
     return (
         <>
@@ -28,7 +31,7 @@ const MenuItems = ({ isAuthenticated, startLogout, showOnDesktop, user, redirect
                     <>
                         <button className={itemClass} onClick={redirect('/')}>Home</button>
                         <button className={itemClass} onClick={redirect('/create')}>Create Post</button>
-                        <button className={itemClass} onClick={startLogout}>Logout</button>
+                        <button className={itemClass} onClick={logoutAndRedirect}>Logout</button>
                         <button className={itemClass} onClick={redirect('/me')}>{displayName}</button>
                     </>
                 )
