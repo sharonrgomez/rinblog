@@ -59,6 +59,21 @@ export const startEditPost = (id, updates) => {
     }
 }
 
+export const startSetPostView = (uid, pid) => {
+    return (dispatch) => {
+        return database.ref(`users/${uid}/posts/${pid}`).once('value').then((snapshot) => {
+            const post = []
+            snapshot.forEach((childSnapshot) => {
+                posts.push({
+                    id: childSnapshot.key,
+                    ...childSnapshot.val()
+                })
+            })
+            dispatch(setPosts(post))
+        })
+    }
+}
+
 export const setPosts = (posts) => ({
     type: SET_POSTS,
     posts

@@ -23,6 +23,7 @@ A blogging app that gives you the freedom to unleash your mind.
 
 * Other features
   * Can view other users' profiles that displays only their posts
+  * On long posts, cut off body length and link a 'Read more' to display more info
   * Responsive web design
     * On desktop, display navigation links in header bar
     * On mobile, links are hidden in a dropdown menu
@@ -46,4 +47,3 @@ A blogging app that gives you the freedom to unleash your mind.
    * Display pic on each post and on profile
 * Let users 'like' each others posts (maybe)
 * When user logs in with Google for the first time, have them make a username
-* Cut off posts length in homepage & profile pages, have a 'display' page for each post that shows full info

@@ -8,6 +8,7 @@ import EditPostPage from '../components/EditPostPage'
 import NotFoundPage from '../components/NotFoundPage'
 import PrivateRoute from './PrivateRoute'
 import PublicRoute from './PublicRoute'
+import PostView from '../components/PostView'
 import Header from '../components/Header'
 import ScrollToTopOnPageChange from '../components/ScrollToTop'
 
@@ -23,6 +24,7 @@ const AppRouter = () => (
                 <PublicRoute path='/signup' component={() => <UserForm title='Sign Up' />} />
                 <PublicRoute path='/login' component={() => <UserForm title='Login' />} />
                 <PublicRoute path='/user/:id' component={(props) => <PostList getUserPosts={true} {...props} />} />
+                <PublicRoute path='/post/:id' component={PostView} />
                 <PrivateRoute path='/me' component={() => <PostList />} />
                 <PrivateRoute path='/create' component={AddPostPage} />
                 <PrivateRoute path='/edit/:id' component={EditPostPage} />

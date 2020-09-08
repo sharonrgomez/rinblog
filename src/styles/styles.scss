@@ -68,11 +68,12 @@ div.ui.inverted.menu {
     .date {
         color: #7e7e7e;
     }
-    .links {
-        color: #00b5ad;
-        &:hover {
-            color: #00706b;
-        }
+}
+
+.links {
+    color: #00b5ad;
+    &:hover {
+        color: #00706b;
     }
 }
 

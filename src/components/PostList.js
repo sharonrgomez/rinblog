@@ -42,27 +42,26 @@ const PostList = ({ startSetAllPosts, startSetPosts, getAllPosts, getUserPosts, 
 				</div>
 			</div>
 			<div className='content-container'>
-				<div>
-					{posts.length === 0
-						? (
-							<span>
-								{getAllPosts || getUserPosts ? 'There are no posts.' : 'You have no posts.'}
-							</span>
-						)
-						: (
-							posts
-								.sort((a, b) => compareDesc(a.createdAt, b.createdAt))
-								.map((post) =>
-									<Post
-										ownsPost={post.author === user}
-										key={post.id}
-										user={post.author}
-										isViewingProfile={getUserPosts}
-										{...post}
-									/>)
-						)
-					}
-				</div>
+				{posts.length === 0
+					? (
+						<span>
+							{getAllPosts || getUserPosts ? 'There are no posts.' : 'You have no posts.'}
+						</span>
+					)
+					: (
+						posts
+							.sort((a, b) => compareDesc(a.createdAt, b.createdAt))
+							.map((post) =>
+								<Post
+									ownsPost={post.author === user}
+									key={post.id}
+									user={post.author}
+									isViewingProfile={getUserPosts}
+									onViewPage={false}
+									{...post}
+								/>)
+					)
+				}
 			</div>
 		</>
 	)
