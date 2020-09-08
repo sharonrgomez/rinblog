@@ -13,7 +13,7 @@ const PostView = ({ post, user, getUserPosts }) => {
 			firebase
 				.database()
 				.ref(`users/${user}`)
-				.on('value', (snapshot) => {
+				.once('value', (snapshot) => {
 					setDisplayName(snapshot.val().user_info.display_name)
 				})
 		}

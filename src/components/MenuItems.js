@@ -5,7 +5,7 @@ import { startLogout } from '../actions/auth'
 
 const MenuItems = ({ isAuthenticated, startLogout, showOnDesktop, user, redirect }) => {
     const itemClass = showOnDesktop ? 'item desktop' : 'item'
-    const [displayName, setDisplayName] = useState('')
+    const [avi, setAvi] = useState('')
 
     // get username
     useEffect(() => {
@@ -13,8 +13,10 @@ const MenuItems = ({ isAuthenticated, startLogout, showOnDesktop, user, redirect
             firebase
                 .database()
                 .ref('users/' + user + '/user_info')
-                .on('value', (snapshot) => {
-                    setDisplayName(snapshot.val().display_name)
+                .once('value', (snapshot) => {
+                    if (snapshot.val()) {
+                        setAvi(snapshot.val().display_pic)
+                    }
                 })
         }
     }, [user])
@@ -32,7 +34,9 @@ const MenuItems = ({ isAuthenticated, startLogout, showOnDesktop, user, redirect
                         <button className={itemClass} onClick={redirect('/')}>Home</button>
                         <button className={itemClass} onClick={redirect('/create')}>Create Post</button>
                         <button className={itemClass} onClick={logoutAndRedirect}>Logout</button>
-                        <button className={itemClass} onClick={redirect('/me')}>{displayName}</button>
+                        <button className={itemClass} onClick={redirect('/me')}>
+                            <img height='auto' src={avi} alt='Your avatar' />
+                        </button>
                     </>
                 )
                 : (

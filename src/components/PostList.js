@@ -7,6 +7,7 @@ import { startSetAllPosts, startSetPosts } from '../actions/posts'
 
 const PostList = ({ startSetAllPosts, startSetPosts, getAllPosts, getUserPosts, posts, user, match }) => {
 	const [displayName, setDisplayName] = useState('')
+	const [avi, setAvi] = useState('')
 
 	useEffect(() => {
 		// display all posts on home pg, display only user's posts on profile pg
@@ -18,11 +19,18 @@ const PostList = ({ startSetAllPosts, startSetPosts, getAllPosts, getUserPosts, 
 			firebase
 				.database()
 				.ref('users/' + userId + '/user_info')
-				.on('value', (snapshot) => {
+				.once('value', (snapshot) => {
 					setDisplayName(snapshot.val().display_name)
+					setAvi(snapshot.val().display_pic)
 				})
 		} else {
 			startSetPosts(user)
+			firebase
+				.database()
+				.ref('users/' + user + '/user_info')
+				.once('value', (snapshot) => {
+					setAvi(snapshot.val().display_pic)
+				})
 		}
 	}, [])
 
@@ -35,8 +43,18 @@ const PostList = ({ startSetAllPosts, startSetPosts, getAllPosts, getUserPosts, 
 							getAllPosts
 								? 'Home'
 								: getUserPosts
-									? displayName
-									: 'Your Posts'
+									? (
+										<>
+											{displayName}'s Blog
+											<img height='50px' src={avi} alt={`${displayName}'s avatar`} />
+										</>
+									)
+									: (
+										<>
+											Your Posts
+											<img height='50px' src={avi} alt={'Your avatar'} />
+										</>
+									)
 						}
 					</span>
 				</div>

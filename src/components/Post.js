@@ -5,6 +5,7 @@ import { formatDistanceStrict } from 'date-fns'
 
 const Post = ({ title, body, createdAt, id, ownsPost, isViewingProfile, user, onViewPage }) => {
     const [displayName, setDisplayName] = useState('')
+    const [avi, setAvi] = useState('')
 
     // get username to be displayed under post
     useEffect(() => {
@@ -13,18 +14,13 @@ const Post = ({ title, body, createdAt, id, ownsPost, isViewingProfile, user, on
             firebase
                 .database()
                 .ref(`users/${user}`)
-                .on('value', (snapshot) => {
+                .once('value', (snapshot) => {
                     setDisplayName(snapshot.val().user_info.display_name)
+                    setAvi(snapshot.val().user_info.display_pic)
                 })
         }
         return () => mounted = false
     }, [])
-
-    const readMore = () => {
-        return (
-            <Link to={`/post/${id}`} className='links'>Read More</Link>
-        )
-    }
 
     return (
         <article className='ui container clearing raised segment post-list__post'>
@@ -52,7 +48,10 @@ const Post = ({ title, body, createdAt, id, ownsPost, isViewingProfile, user, on
                     on profile pages, do not show either. */}
                 {ownsPost
                     ? <Link to={`/edit/${id}`} className='links'>Edit</Link>
-                    : !isViewingProfile && <Link to={`/user/${user}`} className='links'>{displayName}</Link>
+                    : !isViewingProfile &&
+                    <Link to={`/user/${user}`} className='links'>
+                        <img className='display-pic' src={avi} alt={`${displayName}'s avatar`} height='30px' /><span> {displayName}</span>
+                    </Link>
                 }
             </div>
         </article >

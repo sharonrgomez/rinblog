@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { firebase } from '../firebase/firebase'
 import { startLogin } from '../actions/auth'
+import default_pic from '../assets/default_avi.png'
 
 const UserForm = ({ title, startLogin }) => {
 	const [email, setEmail] = useState('')
@@ -18,7 +19,8 @@ const UserForm = ({ title, startLogin }) => {
 					.database()
 					.ref('users/' + res.user.uid + '/user_info')
 					.set({
-						display_name: username
+						display_name: username,
+						display_pic: default_pic
 					})
 			})
 			.catch((e) => {
@@ -33,7 +35,7 @@ const UserForm = ({ title, startLogin }) => {
 			firebase
 				.database()
 				.ref('users/')
-				.on('value', (snapshot) => {
+				.once('value', (snapshot) => {
 					// if there's users in db, loop through them
 					if (snapshot.val()) {
 						let hasMatch = false

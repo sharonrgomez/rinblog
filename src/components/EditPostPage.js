@@ -11,7 +11,9 @@ const EditPostPage = ({ startEditPost, startRemovePost, history, post }) => {
 
     const onRemove = () => {
         startRemovePost({ id: post.id })
-        history.push('/')
+        .then(() => {
+            history.push('/')
+        })
     }
 
     return (
