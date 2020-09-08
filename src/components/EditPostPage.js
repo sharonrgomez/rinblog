@@ -6,14 +6,16 @@ import { startEditPost, startRemovePost } from '../actions/posts'
 const EditPostPage = ({ startEditPost, startRemovePost, history, post }) => {
     const onSubmit = (updates) => {
         startEditPost(post.id, updates)
-        history.push('/')
+            .then(() => {
+                history.push('/')
+            })
     }
 
     const onRemove = () => {
         startRemovePost({ id: post.id })
-        .then(() => {
-            history.push('/')
-        })
+            .then(() => {
+                history.push('/')
+            })
     }
 
     return (

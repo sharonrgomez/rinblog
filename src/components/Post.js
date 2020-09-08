@@ -2,25 +2,26 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { firebase } from '../firebase/firebase'
 import { formatDistanceStrict } from 'date-fns'
+import { set } from 'date-fns/esm'
 
 const Post = ({ title, body, createdAt, id, ownsPost, isViewingProfile, user, onViewPage }) => {
     const [displayName, setDisplayName] = useState('')
     const [avi, setAvi] = useState('')
+    const [isMounted, setIsMounted] = useState(true)
 
-    // get username to be displayed under post
     useEffect(() => {
-        let mounted = true
-        if (mounted) {
+        setIsMounted(true)
+        if (isMounted) {
             firebase
                 .database()
                 .ref(`users/${user}`)
-                .once('value', (snapshot) => {
+                .on('value', (snapshot) => {
                     setDisplayName(snapshot.val().user_info.display_name)
                     setAvi(snapshot.val().user_info.display_pic)
                 })
         }
-        return () => mounted = false
-    }, [])
+        return () => setIsMounted(false)
+    }, [user])
 
     return (
         <article className='ui container clearing raised segment post-list__post'>

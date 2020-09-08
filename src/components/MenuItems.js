@@ -6,24 +6,27 @@ import { startLogout } from '../actions/auth'
 const MenuItems = ({ isAuthenticated, startLogout, showOnDesktop, user, redirect }) => {
     const itemClass = showOnDesktop ? 'item desktop' : 'item'
     const [avi, setAvi] = useState('')
+    const [isMounted, setIsMounted] = useState(true)
 
-    // get username
     useEffect(() => {
-        if (user) {
-            firebase
-                .database()
-                .ref('users/' + user + '/user_info')
-                .once('value', (snapshot) => {
-                    if (snapshot.val()) {
-                        setAvi(snapshot.val().display_pic)
-                    }
-                })
+        setIsMounted(true)
+        if (isMounted) {
+            if (user) {
+                firebase
+                    .database()
+                    .ref('users/' + user + '/user_info')
+                    .once('value', (snapshot) => {
+                        if (snapshot.val()) {
+                            setAvi(snapshot.val().display_pic)
+                        }
+                    })
+            }
         }
+        return () => setIsMounted(false)
     }, [user])
 
     const logoutAndRedirect = () => {
-        startLogout()
-        redirect('/')()
+        startLogout().then(redirect('/'))
     }
 
     return (

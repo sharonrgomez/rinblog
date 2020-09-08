@@ -26,7 +26,6 @@ const Header = ({history}) => {
         } else {
             document.removeEventListener('mousedown', closeOnOutsideClick)
         }
-
         return () => {
             document.removeEventListener('mousedown', closeOnOutsideClick)
         }

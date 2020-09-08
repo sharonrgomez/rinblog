@@ -8,31 +8,38 @@ import { startSetAllPosts, startSetPosts } from '../actions/posts'
 const PostList = ({ startSetAllPosts, startSetPosts, getAllPosts, getUserPosts, posts, user, match }) => {
 	const [displayName, setDisplayName] = useState('')
 	const [avi, setAvi] = useState('')
+	const [isMounted, setIsMounted] = useState(true)
 
 	useEffect(() => {
-		// display all posts on home pg, display only user's posts on profile pg
-		if (getAllPosts) {
-			startSetAllPosts()
-		} else if (getUserPosts) {
-			const userId = match.params.id
-			startSetPosts(userId)
-			firebase
-				.database()
-				.ref('users/' + userId + '/user_info')
-				.once('value', (snapshot) => {
-					setDisplayName(snapshot.val().display_name)
-					setAvi(snapshot.val().display_pic)
+		setIsMounted(true)
+		if (isMounted) {
+			// display all posts on home pg, display only user's posts on profile pg
+			if (getAllPosts) {
+				startSetAllPosts()
+			} else if (getUserPosts) {
+				const userId = match.params.id
+				startSetPosts(userId).then(() => {
+					firebase
+						.database()
+						.ref('users/' + userId + '/user_info')
+						.once('value', (snapshot) => {
+							setDisplayName(snapshot.val().display_name)
+							setAvi(snapshot.val().display_pic)
+						})
 				})
-		} else {
-			startSetPosts(user)
-			firebase
-				.database()
-				.ref('users/' + user + '/user_info')
-				.once('value', (snapshot) => {
-					setAvi(snapshot.val().display_pic)
+			} else {
+				startSetPosts(user).then(() => {
+					firebase
+						.database()
+						.ref('users/' + user + '/user_info')
+						.once('value', (snapshot) => {
+							setAvi(snapshot.val().display_pic)
+						})
 				})
+			}
 		}
-	}, [])
+		return () => setIsMounted(false)
+	}, [match, user, getAllPosts, getUserPosts])
 
 	return (
 		<>
