@@ -46,3 +46,4 @@ A blogging app that gives you the freedom to unleash your mind.
    * Display pic on each post and on profile
 * Let users 'like' each others posts (maybe)
 * When user logs in with Google for the first time, have them make a username
+* Cut off posts length in homepage & profile pages, have a 'display' page for each post that shows full info
