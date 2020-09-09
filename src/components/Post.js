@@ -14,7 +14,7 @@ const Post = ({ title, body, createdAt, id, ownsPost, isViewingProfile, user, on
             firebase
                 .database()
                 .ref(`users/${user}`)
-                .on('value', (snapshot) => {
+                .once('value', (snapshot) => {
                     setDisplayName(snapshot.val().user_info.display_name)
                     setAvi(snapshot.val().user_info.display_pic)
                 })

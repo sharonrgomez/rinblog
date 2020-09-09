@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { firebase } from '../firebase/firebase'
 import { compareDesc } from 'date-fns'
 import Post from './Post'
@@ -33,6 +34,7 @@ const PostList = ({ startSetAllPosts, startSetPosts, getAllPosts, getUserPosts, 
 						.database()
 						.ref('users/' + user + '/user_info')
 						.once('value', (snapshot) => {
+							setDisplayName(snapshot.val().display_name)
 							setAvi(snapshot.val().display_pic)
 						})
 				})
@@ -45,7 +47,7 @@ const PostList = ({ startSetAllPosts, startSetPosts, getAllPosts, getUserPosts, 
 		<>
 			<div>
 				<div className='content-container'>
-					<span className='ui large header'>
+					<span className='ui large header page-header'>
 						{
 							getAllPosts
 								? 'Home'
@@ -58,7 +60,10 @@ const PostList = ({ startSetAllPosts, startSetPosts, getAllPosts, getUserPosts, 
 									)
 									: (
 										<>
-											Your Posts
+											<div className='links__profile'>
+												{displayName}'s Blog
+												<Link to='/edit/profile' className='links'>Edit Profile</Link>
+											</div>
 											<img height='50px' src={avi} alt={'Your avatar'} />
 										</>
 									)

@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { firebase } from '../firebase/firebase'
 import { startLogin } from '../actions/auth'
 import default_pic from '../assets/default_avi.png'
+import { history } from '../routers/AppRouter'
 
 const UserForm = ({ title, startLogin }) => {
 	const [email, setEmail] = useState('')
@@ -22,6 +23,9 @@ const UserForm = ({ title, startLogin }) => {
 						display_name: username,
 						display_pic: default_pic
 					})
+			})
+			.then(() => {
+				history.push('/')
 			})
 			.catch((e) => {
 				setError(e.message)
@@ -66,6 +70,9 @@ const UserForm = ({ title, startLogin }) => {
 		firebase
 			.auth()
 			.signInWithEmailAndPassword(email, password)
+			.then(() => {
+				history.push('/')
+			})
 			.catch((e) => {
 				setError(e.message)
 			})

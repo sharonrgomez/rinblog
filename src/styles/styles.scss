@@ -50,10 +50,11 @@ div.ui.inverted.menu {
     @media (min-width: 1000px) {
         width: 45%;
     }
-    .ui.large.header {
+    .ui.large.header.page-header {
         display: flex;
         align-items: center;
         justify-content: space-between;
+        margin: 0 1.5rem;
     }
 }
 
@@ -86,6 +87,14 @@ div.ui.inverted.menu {
     color: #00b5ad;
     &:hover {
         color: #00706b;
+    }
+}
+
+.links__profile {
+    display: flex;
+    flex-direction: column;
+    .links {
+        font-size: 12px;
     }
 }
 

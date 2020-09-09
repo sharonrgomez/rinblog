@@ -1,4 +1,5 @@
-import { firebase, googleAuthProvider } from '../firebase/firebase'
+import database, { firebase, googleAuthProvider } from '../firebase/firebase'
+import { history } from '../routers/AppRouter'
 import default_pic from '../assets/default_avi.png'
 
 export const login = (uid) => ({
@@ -19,6 +20,9 @@ export const startLogin = () => {
                     })
                 }
             })
+            .then(() => {
+                history.push('/')
+            })
     }
 }
 
@@ -29,5 +33,19 @@ export const logout = () => ({
 export const startLogout = () => {
     return () => {
         return firebase.auth().signOut()
+    }
+}
+
+export const editProfile = (updates) => ({
+    type: 'EDIT_PROFILE',
+    updates
+})
+
+export const startEditProfile = (updates) => {
+    return (dispatch, getState) => {
+        const uid = getState().auth.uid
+        return database.ref(`users/${uid}/user_info`).update(updates).then(() => {
+            dispatch(editProfile(updates))
+        })
     }
 }

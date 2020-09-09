@@ -6,6 +6,8 @@ export default (state = {}, action) => {
             }
         case 'LOGOUT':
             return {}
+        case 'EDIT_PROFILE':
+            return state
         default:
             return state
     }
