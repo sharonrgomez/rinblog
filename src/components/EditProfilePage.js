@@ -33,6 +33,20 @@ const EditProfilePage = ({ user, startEditProfile }) => {
 		setUsername(e.target.value)
 	}
 
+	const onAviChange = (e) => {
+		const file = e.target.files[0]
+		const reader = new FileReader()
+
+		reader.addEventListener("load", function () {
+			// convert image file to base64 string
+			setAvi(reader.result)
+		}, false);
+
+		if (file) {
+			reader.readAsDataURL(file);
+		}
+	}
+
 	const onSubmit = (updates) => {
 		startEditProfile(updates)
 			.then(() => {
@@ -50,15 +64,19 @@ const EditProfilePage = ({ user, startEditProfile }) => {
 				.ref('users/')
 				.once('value', (snapshot) => {
 					let hasMatch = false
+					let currentUser = snapshot.val()[user].user_info.display_name
 					for (const [key, value] of Object.entries(snapshot.val())) {
 						let existingName = value.user_info.display_name
-						if (existingName === username) {
+						if (existingName === username && existingName !== currentUser) {
 							hasMatch = true
 							break
 						}
 					}
 					if (!hasMatch) {
-						onSubmit({ display_name: username })
+						onSubmit({
+							display_name: username,
+							display_pic: avi
+						})
 					} else {
 						setError('That username already exists.')
 					}
@@ -88,12 +106,13 @@ const EditProfilePage = ({ user, startEditProfile }) => {
 							<label>Password</label>
 							<input type="password" />
 						</div> */}
-						{/* <div className="field">
+						<div className="field">
 							<label>Avatar</label>
 							<input
 								type="file"
+								onChange={onAviChange}
 							/>
-						</div> */}
+						</div>
 						<button className='ui teal right floated small submit button' type='submit'>
 							Update Profile
 						</button>

@@ -24,6 +24,13 @@ div.ui.inverted.menu {
             display: none;
         }
     }
+    .item .display-pic {
+        width: 2.5rem !important;
+        height: 2.5rem;
+        margin-right: 0.4rem;
+        object-fit: cover;
+        border-radius: 50%;
+    }
 }
 
 .mobile-menu {
@@ -50,11 +57,22 @@ div.ui.inverted.menu {
     @media (min-width: 1000px) {
         width: 45%;
     }
+    .ui.large.header .display-pic {
+        width: 6rem;
+        height: 6rem;
+        object-fit: cover;
+        border-radius: 50%;
+        @media (min-width: 1000px) {
+            width: 8rem;
+            height: 8rem;
+        }
+    }
     .ui.large.header.page-header {
         display: flex;
         align-items: center;
         justify-content: space-between;
         margin: 0 1.5rem;
+        font-size: 2.5rem;
     }
     .no-posts {
         display: flex;
@@ -81,7 +99,11 @@ div.ui.inverted.menu {
         color: #7e7e7e;
     }
     .display-pic {
+        width: 2.5rem !important;
+        height: 2.5rem;
         margin-right: 0.4rem;
+        object-fit: cover;
+        border-radius: 50%;
     }
     .links {
         display: flex;
@@ -164,3 +186,5 @@ div .ui.divider {
         margin-top: 0.5rem;
     }
 }
+
+// other

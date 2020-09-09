@@ -50,7 +50,7 @@ const Post = ({ title, body, createdAt, id, ownsPost, isViewingProfile, user, on
                     ? <Link to={`/edit/${id}`} className='links'>Edit</Link>
                     : !isViewingProfile &&
                     <Link to={`/user/${user}`} className='links'>
-                        <img className='display-pic' src={avi} alt={`${displayName}'s avatar`} height='30px' /><span> {displayName}</span>
+                        <img className='display-pic' src={avi} alt={`${displayName}'s avatar`} /><span> {displayName}</span>
                     </Link>
                 }
             </div>

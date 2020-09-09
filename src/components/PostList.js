@@ -55,7 +55,7 @@ const PostList = ({ startSetAllPosts, startSetPosts, getAllPosts, getUserPosts, 
 									? (
 										<>
 											{displayName}'s Blog
-											<img height='50px' src={avi} alt={`${displayName}'s avatar`} />
+											<img className='display-pic' src={avi} alt={`${displayName}'s avatar`} />
 										</>
 									)
 									: (
@@ -64,7 +64,7 @@ const PostList = ({ startSetAllPosts, startSetPosts, getAllPosts, getUserPosts, 
 												{displayName}'s Blog
 												<Link to='/edit/profile' className='links'>Edit Profile</Link>
 											</div>
-											<img height='50px' src={avi} alt={'Your avatar'} />
+											<img className='display-pic' src={avi} alt={'Your avatar'} />
 										</>
 									)
 						}

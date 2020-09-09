@@ -8,6 +8,7 @@ const MenuItems = ({ isAuthenticated, startLogout, showOnDesktop, user, redirect
     const [avi, setAvi] = useState('')
     const [isMounted, setIsMounted] = useState(true)
 
+    // store firebase thing and then use .off()
     useEffect(() => {
         setIsMounted(true)
         if (isMounted) {
@@ -15,7 +16,7 @@ const MenuItems = ({ isAuthenticated, startLogout, showOnDesktop, user, redirect
                 firebase
                     .database()
                     .ref('users/' + user + '/user_info')
-                    .once('value', (snapshot) => {
+                    .on('value', (snapshot) => {
                         if (snapshot.val()) {
                             setAvi(snapshot.val().display_pic)
                         }
@@ -38,7 +39,7 @@ const MenuItems = ({ isAuthenticated, startLogout, showOnDesktop, user, redirect
                         <button className={itemClass} onClick={redirect('/create')}>Create Post</button>
                         <button className={itemClass} onClick={logoutAndRedirect}>Logout</button>
                         <button className={itemClass} onClick={redirect('/me')}>
-                            <img height='auto' src={avi} alt='Your avatar' />
+                            <img className='display-pic' src={avi} alt='Your avatar' />
                         </button>
                     </>
                 )
