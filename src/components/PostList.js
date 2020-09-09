@@ -10,6 +10,7 @@ const PostList = ({ startSetAllPosts, startSetPosts, getAllPosts, getUserPosts, 
 	const [displayName, setDisplayName] = useState('')
 	const [avi, setAvi] = useState('')
 	const [isMounted, setIsMounted] = useState(true)
+	const [isLoaded, setIsLoaded] = useState(false)
 
 	useEffect(() => {
 		setIsMounted(true)
@@ -17,15 +18,20 @@ const PostList = ({ startSetAllPosts, startSetPosts, getAllPosts, getUserPosts, 
 			// display all posts on home pg, display only user's posts on profile pg
 			if (getAllPosts) {
 				startSetAllPosts()
+				setIsLoaded(true)
 			} else if (getUserPosts) {
 				const userId = match.params.id
 				startSetPosts(userId).then(() => {
+					// make function for this block
 					firebase
 						.database()
 						.ref('users/' + userId + '/user_info')
 						.once('value', (snapshot) => {
 							setDisplayName(snapshot.val().display_name)
 							setAvi(snapshot.val().display_pic)
+						})
+						.then(() => {
+							setIsLoaded(true)
 						})
 				})
 			} else {
@@ -37,6 +43,9 @@ const PostList = ({ startSetAllPosts, startSetPosts, getAllPosts, getUserPosts, 
 							setDisplayName(snapshot.val().display_name)
 							setAvi(snapshot.val().display_pic)
 						})
+						.then(() => {
+							setIsLoaded(true)
+						})
 				})
 			}
 		}
@@ -47,28 +56,48 @@ const PostList = ({ startSetAllPosts, startSetPosts, getAllPosts, getUserPosts, 
 		<>
 			<div>
 				<div className='content-container'>
-					<span className='ui large header page-header'>
-						{
-							getAllPosts
-								? 'Home'
-								: getUserPosts
-									? (
-										<>
-											{displayName}'s Blog
-											<img className='display-pic' src={avi} alt={`${displayName}'s avatar`} />
-										</>
-									)
-									: (
-										<>
-											<div className='links__profile'>
-												{displayName}'s Blog
-												<Link to='/edit/profile' className='links'>Edit Profile</Link>
-											</div>
-											<img className='display-pic' src={avi} alt={'Your avatar'} />
-										</>
-									)
-						}
-					</span>
+					{!isLoaded
+						? (
+							<div className='placeholder__container'>
+								<div className='placeholder__line'>
+									<div className="ui placeholder">
+										<div className="long line"></div>
+										<div className="medium line"></div>
+									</div>
+								</div>
+								<div className='placeholder__square'>
+									<div className='ui placeholder'>
+										<div className='square image'></div>
+									</div>
+								</div>
+
+							</div>
+						)
+						: (
+							<span className='ui large header page-header'>
+								{
+									getAllPosts
+										? 'Home'
+										: getUserPosts
+											? (
+												<>
+													{displayName}'s Blog
+													<img className='display-pic' src={avi} alt={`${displayName}'s avatar`} />
+												</>
+											)
+											: (
+												<>
+													<div className='links__profile'>
+														{displayName}'s Blog
+														<Link to='/edit/profile' className='links'>Edit Profile</Link>
+													</div>
+													<img className='display-pic' src={avi} alt={'Your avatar'} />
+												</>
+											)
+								}
+							</span>
+						)
+					}
 				</div>
 			</div>
 			<div className='content-container'>

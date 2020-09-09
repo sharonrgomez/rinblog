@@ -62,23 +62,54 @@ div.ui.inverted.menu {
         height: 6rem;
         object-fit: cover;
         border-radius: 50%;
-        @media (min-width: 1000px) {
+        @media (min-width: 600px) {
             width: 8rem;
             height: 8rem;
         }
     }
-    .ui.large.header.page-header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin: 0 1.5rem;
-        font-size: 2.5rem;
+    .ui.large.header {
+        &.page-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 0 1.5rem;
+            font-size: 2.5rem;
+        }
+        &.no-flex {
+            display: flex;
+            justify-content: space-between;
+            margin: 0 1.5rem;
+        }
     }
     .no-posts {
         display: flex;
         height: 35vh;
         justify-content: center;
         align-items: center;
+    }
+    .placeholder__container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 0 2rem;
+        .placeholder__line {
+            display: inline-block;
+            width: 8rem;
+            @media (min-width: 450px) {
+                width: 15rem;
+            }
+            .long.line {
+                height: 0;
+                margin-top: 1rem;
+            }
+        }
+        .placeholder__square {
+            display: inline-block;
+            width: 6rem;
+            @media (min-width: 600px) {
+                width: 8rem;
+            }
+        }
     }
 }
 
