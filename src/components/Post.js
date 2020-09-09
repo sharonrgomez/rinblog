@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { firebase } from '../firebase/firebase'
 import { formatDistanceStrict } from 'date-fns'
-import { set } from 'date-fns/esm'
 
 const Post = ({ title, body, createdAt, id, ownsPost, isViewingProfile, user, onViewPage }) => {
     const [displayName, setDisplayName] = useState('')

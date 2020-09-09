@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
-import { firebase } from '../firebase/firebase'
 import Post from './Post'
 
 const PostView = ({ post, user, getUserPosts }) => (
@@ -15,7 +14,6 @@ const PostView = ({ post, user, getUserPosts }) => (
 		/>
 	</div>
 )
-
 
 const mapStateToProps = (state, props) => ({
 	post: state.posts.find((post) => post.id === props.match.params.id),
