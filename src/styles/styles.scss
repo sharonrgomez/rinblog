@@ -56,6 +56,12 @@ div.ui.inverted.menu {
         justify-content: space-between;
         margin: 0 1.5rem;
     }
+    .no-posts {
+        display: flex;
+        height: 35vh;
+        justify-content: center;
+        align-items: center;
+    }
 }
 
 // post

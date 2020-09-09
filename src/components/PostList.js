@@ -74,7 +74,7 @@ const PostList = ({ startSetAllPosts, startSetPosts, getAllPosts, getUserPosts, 
 			<div className='content-container'>
 				{posts.length === 0
 					? (
-						<span>
+						<span className='ui small header no-posts'>
 							{getAllPosts || getUserPosts ? 'There are no posts.' : 'You have no posts.'}
 						</span>
 					)
