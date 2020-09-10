@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { firebase } from '../firebase/firebase'
+import UserAvatar from './UserAvatar'
 import { startLogout } from '../actions/auth'
 
 const MenuItems = ({ isAuthenticated, startLogout, showOnDesktop, user, redirect }) => {
     const itemClass = showOnDesktop ? 'item desktop' : 'item'
     const [avi, setAvi] = useState('')
     const [isMounted, setIsMounted] = useState(true)
+    const [isLoaded, setIsLoaded] = useState(false)
 
     useEffect(() => {
         setIsMounted(true)
@@ -24,6 +26,7 @@ const MenuItems = ({ isAuthenticated, startLogout, showOnDesktop, user, redirect
                         })
                 )
             }
+            setIsLoaded(true)
         }
         return () => {
             setIsMounted(false)
@@ -46,7 +49,7 @@ const MenuItems = ({ isAuthenticated, startLogout, showOnDesktop, user, redirect
                         <button className={itemClass} onClick={redirect('/create')}>Create Post</button>
                         <button className={itemClass} onClick={logoutAndRedirect}>Logout</button>
                         <button className={itemClass} onClick={redirect('/me')}>
-                            <img className='display-pic' src={avi} alt='Your avatar' />
+                            <UserAvatar src={avi} isCurrentUser={true} />
                         </button>
                     </>
                 )

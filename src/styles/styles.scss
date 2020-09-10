@@ -24,13 +24,6 @@ div.ui.inverted.menu {
             display: none;
         }
     }
-    .item .display-pic {
-        width: 2.5rem !important;
-        height: 2.5rem;
-        margin-right: 0.4rem;
-        object-fit: cover;
-        border-radius: 50%;
-    }
 }
 
 .mobile-menu {
@@ -56,16 +49,6 @@ div.ui.inverted.menu {
     }
     @media (min-width: 1000px) {
         width: 45%;
-    }
-    .ui.large.header .display-pic {
-        width: 6rem;
-        height: 6rem;
-        object-fit: cover;
-        border-radius: 50%;
-        @media (min-width: 600px) {
-            width: 8rem;
-            height: 8rem;
-        }
     }
     .ui.large.header {
         &.page-header {
@@ -129,13 +112,6 @@ div.ui.inverted.menu {
     .date {
         color: #7e7e7e;
     }
-    .display-pic {
-        width: 2.5rem !important;
-        height: 2.5rem;
-        margin-right: 0.4rem;
-        object-fit: cover;
-        border-radius: 50%;
-    }
     .links {
         display: flex;
         align-items: center;
@@ -173,7 +149,6 @@ div .ui.divider {
     .header {
         word-wrap: break-word;
     }
-
     &:last-child {
         margin-bottom: 1.5rem;
     }
@@ -219,4 +194,43 @@ div .ui.divider {
     }
 }
 
-// other
+// avatar
+
+.details .display-pic__container {
+    width: 2.5rem;
+    height: 2.5rem;
+    margin-right: 0.4rem;
+    border-radius: 50%;
+    overflow: hidden;
+    .display-pic {
+        max-width: 100%;
+        object-fit: cover;
+    }
+}
+
+div.ui.inverted.menu .item .display-pic__container {
+    width: 2.5rem;
+    height: 2.5rem;
+    margin-right: 0.4rem;
+    border-radius: 50%;
+    overflow: hidden;
+    .display-pic {
+        max-width: 100%;
+        object-fit: cover;
+    }
+}
+
+.content-container .ui.large.header .display-pic__container {
+    width: 6rem;
+    height: 6rem;
+    border-radius: 50%;
+    overflow: hidden;
+    @media (min-width: 600px) {
+        width: 8rem;
+        height: 8rem;
+    }
+    .display-pic {
+        max-width: 100%;
+        object-fit: cover;
+    }
+}

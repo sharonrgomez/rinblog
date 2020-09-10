@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { firebase } from '../firebase/firebase'
 import { formatDistanceStrict } from 'date-fns'
+import UserAvatar from './UserAvatar'
 
 const Post = ({ title, body, createdAt, id, ownsPost, isViewingProfile, user, onViewPage }) => {
     const [displayName, setDisplayName] = useState('')
@@ -50,7 +51,7 @@ const Post = ({ title, body, createdAt, id, ownsPost, isViewingProfile, user, on
                     ? <Link to={`/edit/${id}`} className='links'>Edit</Link>
                     : !isViewingProfile &&
                     <Link to={`/user/${user}`} className='links'>
-                        <img className='display-pic' src={avi} alt={`${displayName}'s avatar`} /><span> {displayName}</span>
+                        <UserAvatar src={avi} username={displayName} isCurrentUser={false} /><span> {displayName}</span>
                     </Link>
                 }
             </div>

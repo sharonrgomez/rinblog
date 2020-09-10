@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { firebase } from '../firebase/firebase'
 import { compareDesc } from 'date-fns'
 import Post from './Post'
+import UserAvatar from './UserAvatar'
 import { startSetAllPosts, startSetPosts } from '../actions/posts'
 
 const PostList = ({ startSetAllPosts, startSetPosts, getAllPosts, getUserPosts, posts, user, match }) => {
@@ -75,7 +76,7 @@ const PostList = ({ startSetAllPosts, startSetPosts, getAllPosts, getUserPosts, 
 											? (
 												<>
 													{displayName}'s Blog
-													<img className='display-pic' src={avi} alt={`${displayName}'s avatar`} />
+													<UserAvatar src={avi} username={displayName} isCurrentUser={false} />
 												</>
 											)
 											: (
@@ -84,7 +85,7 @@ const PostList = ({ startSetAllPosts, startSetPosts, getAllPosts, getUserPosts, 
 														{displayName}'s Blog
 														<Link to='/edit/profile' className='links'>Edit Profile</Link>
 													</div>
-													<img className='display-pic' src={avi} alt={'Your avatar'} />
+													<UserAvatar src={avi} username={displayName} isCurrentUser={true} />
 												</>
 											)
 								}
