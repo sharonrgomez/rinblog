@@ -27,7 +27,7 @@ const MenuItems = ({ isAuthenticated, startLogout, showOnDesktop, user, redirect
         }
         return () => {
             setIsMounted(false)
-            if (getAvatar) {
+            if (!user && getAvatar) {
                 getAvatar.off()
             }
         }
