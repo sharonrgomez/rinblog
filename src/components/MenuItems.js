@@ -8,22 +8,29 @@ const MenuItems = ({ isAuthenticated, startLogout, showOnDesktop, user, redirect
     const [avi, setAvi] = useState('')
     const [isMounted, setIsMounted] = useState(true)
 
-    // store firebase thing and then use .off()
     useEffect(() => {
         setIsMounted(true)
+        let getAvatar;
         if (isMounted) {
             if (user) {
-                firebase
-                    .database()
-                    .ref('users/' + user + '/user_info')
-                    .on('value', (snapshot) => {
-                        if (snapshot.val()) {
-                            setAvi(snapshot.val().display_pic)
-                        }
-                    })
+                getAvatar = (
+                    firebase
+                        .database()
+                        .ref('users/' + user + '/user_info')
+                        .on('value', (snapshot) => {
+                            if (snapshot.val()) {
+                                setAvi(snapshot.val().display_pic)
+                            }
+                        })
+                )
             }
         }
-        return () => setIsMounted(false)
+        return () => {
+            setIsMounted(false)
+            if (getAvatar) {
+                getAvatar.off()
+            }
+        }
     }, [user])
 
     const logoutAndRedirect = () => {
