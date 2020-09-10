@@ -12,27 +12,29 @@ const MenuItems = ({ isAuthenticated, startLogout, showOnDesktop, user, redirect
 
     useEffect(() => {
         setIsMounted(true)
-        let getAvatar
+        // let getAvatar
         if (isMounted) {
             if (user) {
-                getAvatar = (
-                    firebase
-                        .database()
-                        .ref('users/' + user + '/user_info')
-                        .on('value', (snapshot) => {
-                            if (snapshot.val()) {
-                                setAvi(snapshot.val().display_pic)
-                            }
-                        })
-                )
+                // getAvatar = (
+                firebase
+                    .database()
+                    .ref('users/' + user + '/user_info')
+                    .once('value', (snapshot) => {
+                        if (snapshot.val()) {
+                            setAvi(snapshot.val().display_pic)
+                        }
+                    })
+                    .then(() => {
+                        setIsLoaded(true)
+                    })
+                // )
             }
-            setIsLoaded(true)
         }
         return () => {
             setIsMounted(false)
-            if (!user && getAvatar) {
-                getAvatar.off()
-            }
+            // if (!user && getAvatar) {
+            //     getAvatar.off()
+            // }
         }
     }, [user])
 
@@ -49,7 +51,18 @@ const MenuItems = ({ isAuthenticated, startLogout, showOnDesktop, user, redirect
                         <button className={itemClass} onClick={redirect('/create')}>Create Post</button>
                         <button className={itemClass} onClick={logoutAndRedirect}>Logout</button>
                         <button className={itemClass} onClick={redirect('/me')}>
-                            <UserAvatar src={avi} isCurrentUser={true} />
+                            {!isLoaded
+                                ? (
+                                    <div className='placeholder__container'>
+                                        <div className='placeholder__square'>
+                                            <div className='ui placeholder'>
+                                                <div className='square image'></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                )
+                                : <UserAvatar src={avi} isCurrentUser={true} />
+                            }
                         </button>
                     </>
                 )

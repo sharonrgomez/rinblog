@@ -70,6 +70,8 @@ div.ui.inverted.menu {
         justify-content: center;
         align-items: center;
     }
+
+    // user profile header
     .placeholder__container {
         display: flex;
         justify-content: space-between;
@@ -89,6 +91,8 @@ div.ui.inverted.menu {
         .placeholder__square {
             display: inline-block;
             width: 6rem;
+            border-radius: 50%;
+            overflow: hidden;
             @media (min-width: 600px) {
                 width: 8rem;
             }
@@ -235,5 +239,37 @@ div.ui.inverted.menu .item .display-pic__container {
     .display-pic {
         max-width: 100%;
         object-fit: cover;
+    }
+}
+
+// current user avatar
+.placeholder__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .placeholder__square {
+        display: inline-block;
+        width: 2.5rem;
+        border-radius: 50%;
+        overflow: hidden;
+    }
+}
+
+// placeholder posts
+.ui.raised.segment {
+    .ui.placeholder:first-child {
+        max-width: 100%;
+        .header .line {
+            margin-top: 1.5rem;
+        }
+    }
+    .test.ui.placeholder:last-child {
+        max-width: 100%;
+        .placeholder__square {
+            display: inline-block;
+            width: 2.5rem;
+            border-radius: 50%;
+            overflow: hidden;
+        }
     }
 }

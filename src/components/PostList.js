@@ -5,6 +5,7 @@ import { firebase } from '../firebase/firebase'
 import { compareDesc } from 'date-fns'
 import Post from './Post'
 import UserAvatar from './UserAvatar'
+import PlaceholderPost from './PlaceholderPost'
 import { startSetAllPosts, startSetPosts } from '../actions/posts'
 
 const PostList = ({ startSetAllPosts, startSetPosts, getAllPosts, getUserPosts, posts, user, match }) => {
@@ -19,7 +20,9 @@ const PostList = ({ startSetAllPosts, startSetPosts, getAllPosts, getUserPosts, 
 			// display all posts on home pg, display only user's posts on profile pg
 			if (getAllPosts) {
 				startSetAllPosts()
-				setIsLoaded(true)
+					.then(() => {
+						setIsLoaded(true)
+					})
 			} else if (getUserPosts) {
 				const userId = match.params.id
 				getUserInfo(userId)
@@ -50,13 +53,13 @@ const PostList = ({ startSetAllPosts, startSetPosts, getAllPosts, getUserPosts, 
 		<>
 			<div>
 				<div className='content-container'>
-					{!isLoaded
+					{!isLoaded && !getAllPosts
 						? (
 							<div className='placeholder__container'>
 								<div className='placeholder__line'>
-									<div className="ui placeholder">
-										<div className="long line"></div>
-										<div className="medium line"></div>
+									<div className='ui placeholder'>
+										<div className='long line'></div>
+										<div className='medium line'></div>
 									</div>
 								</div>
 								<div className='placeholder__square'>
@@ -95,24 +98,36 @@ const PostList = ({ startSetAllPosts, startSetPosts, getAllPosts, getUserPosts, 
 				</div>
 			</div>
 			<div className='content-container'>
-				{posts.length === 0
+				{!isLoaded
 					? (
-						<span className='ui small header no-posts'>
-							{getAllPosts || getUserPosts ? 'There are no posts.' : 'You have no posts.'}
-						</span>
+						[...Array(5)].map((v, i) => (
+							<PlaceholderPost key={i} />
+						))
 					)
 					: (
-						posts
-							.sort((a, b) => compareDesc(a.createdAt, b.createdAt))
-							.map((post) =>
-								<Post
-									ownsPost={post.author === user}
-									key={post.id}
-									user={post.author}
-									isViewingProfile={getUserPosts}
-									onViewPage={false}
-									{...post}
-								/>)
+						<>
+							{
+								isLoaded && posts.length === 0
+									? (
+										<span className='ui small header no-posts'>
+											{getAllPosts || getUserPosts ? 'There are no posts.' : 'You have no posts.'}
+										</span>
+									)
+									: (
+										posts
+											.sort((a, b) => compareDesc(a.createdAt, b.createdAt))
+											.map((post) =>
+												<Post
+													ownsPost={post.author === user}
+													key={post.id}
+													user={post.author}
+													isViewingProfile={getUserPosts}
+													onViewPage={false}
+													{...post}
+												/>)
+									)
+							}
+						</>
 					)
 				}
 			</div>
