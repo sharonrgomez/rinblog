@@ -12,7 +12,7 @@ const MenuItems = ({ isAuthenticated, startLogout, showOnDesktop, user, redirect
 
     useEffect(() => {
         setIsMounted(true)
-        let getAvatar;
+        let getAvatar
         if (isMounted) {
             if (user) {
                 getAvatar = (

@@ -37,13 +37,13 @@ const EditProfilePage = ({ user, startEditProfile }) => {
 		const file = e.target.files[0]
 		const reader = new FileReader()
 
-		reader.addEventListener("load", function () {
+		reader.addEventListener('load', function () {
 			// convert image file to base64 string
 			setAvi(reader.result)
-		}, false);
+		}, false)
 
 		if (file) {
-			reader.readAsDataURL(file);
+			reader.readAsDataURL(file)
 		}
 	}
 
