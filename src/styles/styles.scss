@@ -152,8 +152,9 @@ div.ui.inverted.menu {
 .links__profile {
     display: flex;
     flex-direction: column;
+    word-break: break-word;
     .links {
-        font-size: 12px;
+        font-size: 1rem;
     }
 }
 
