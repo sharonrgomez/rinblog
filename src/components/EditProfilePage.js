@@ -19,7 +19,6 @@ const EditProfilePage = ({ user, startEditProfile }) => {
 				.ref('users/' + user + '/user_info')
 				.once('value', (snapshot) => {
 					if (snapshot.val()) {
-						setAvi(snapshot.val().display_pic)
 						setUsername(snapshot.val().display_name)
 					}
 				})
@@ -35,16 +34,16 @@ const EditProfilePage = ({ user, startEditProfile }) => {
 
 	const onAviChange = (e) => {
 		const file = e.target.files[0]
-		const reader = new FileReader()
+		// const reader = new FileReader()
 
-		reader.addEventListener('load', function () {
-			// convert image file to base64 string
-			setAvi(reader.result)
-		}, false)
+		// reader.addEventListener('load', function () {
+		// 	// convert image file to base64 string
+		// 	setAvi(reader.result)
+		// }, false)
 
-		if (file) {
-			reader.readAsDataURL(file)
-		}
+		// if (file) {
+		// 	reader.readAsDataURL(file)
+		// }
 	}
 
 	const onSubmit = (updates) => {

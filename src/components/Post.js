@@ -17,7 +17,11 @@ const Post = ({ title, body, createdAt, id, ownsPost, isViewingProfile, user, on
                 .ref(`users/${user}`)
                 .once('value', (snapshot) => {
                     setDisplayName(snapshot.val().user_info.display_name)
-                    setAvi(snapshot.val().user_info.display_pic)
+                    if (snapshot.val().user_info.display_pic) {
+                        setAvi(snapshot.val().user_info.display_pic)
+                    } else {
+                        setAvi('https://i.imgur.com/DLiQvK4.jpg')
+                    }
                 })
         }
         return () => setIsMounted(false)

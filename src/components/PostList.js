@@ -41,7 +41,11 @@ const PostList = ({ startSetAllPosts, startSetPosts, getAllPosts, getUserPosts, 
 					.ref('users/' + user + '/user_info')
 					.once('value', (snapshot) => {
 						setDisplayName(snapshot.val().display_name)
-						setAvi(snapshot.val().display_pic)
+						if (snapshot.val().display_pic) {
+							setAvi(snapshot.val().display_pic)
+						} else {
+							setAvi('https://i.imgur.com/DLiQvK4.jpg')
+						}
 					})
 					.then(() => {
 						setIsLoaded(true)

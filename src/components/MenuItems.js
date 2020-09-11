@@ -20,8 +20,10 @@ const MenuItems = ({ isAuthenticated, startLogout, showOnDesktop, user, redirect
                     .database()
                     .ref('users/' + user + '/user_info')
                     .once('value', (snapshot) => {
-                        if (snapshot.val()) {
+                        if (snapshot.val().display_pic) {
                             setAvi(snapshot.val().display_pic)
+                        } else {
+                            setAvi('https://i.imgur.com/DLiQvK4.jpg')
                         }
                     })
                     .then(() => {

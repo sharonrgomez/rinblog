@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { firebase } from '../firebase/firebase'
 import { startLogin } from '../actions/auth'
-import default_pic from '../assets/default_avi.jpg'
 import { history } from '../routers/AppRouter'
 
 const UserForm = ({ title, startLogin }) => {
@@ -20,8 +19,7 @@ const UserForm = ({ title, startLogin }) => {
 					.database()
 					.ref('users/' + res.user.uid + '/user_info')
 					.set({
-						display_name: username,
-						display_pic: default_pic
+						display_name: username
 					})
 			})
 			.then(() => {
