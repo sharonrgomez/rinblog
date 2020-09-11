@@ -20,9 +20,9 @@ const PostList = ({ startSetAllPosts, startSetPosts, getAllPosts, getUserPosts, 
 			// display all posts on home pg, display only user's posts on profile pg
 			if (getAllPosts) {
 				startSetAllPosts()
-					// .then(() => {
-					// 	setIsLoaded(true)
-					// })
+					.then(() => {
+						setIsLoaded(true)
+					})
 			} else if (getUserPosts) {
 				const userId = match.params.id
 				getUserInfo(userId)
@@ -43,9 +43,9 @@ const PostList = ({ startSetAllPosts, startSetPosts, getAllPosts, getUserPosts, 
 						setDisplayName(snapshot.val().display_name)
 						setAvi(snapshot.val().display_pic)
 					})
-					// .then(() => {
-					// 	setIsLoaded(true)
-					// })
+					.then(() => {
+						setIsLoaded(true)
+					})
 			})
 	}
 

@@ -1,6 +1,6 @@
 import database, { firebase, googleAuthProvider } from '../firebase/firebase'
 import { history } from '../routers/AppRouter'
-import default_pic from '../assets/default_avi.png'
+import default_pic from '../assets/default_avi.jpg'
 
 export const login = (uid) => ({
     type: 'LOGIN',

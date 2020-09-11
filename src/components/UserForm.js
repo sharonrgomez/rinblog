@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { firebase } from '../firebase/firebase'
 import { startLogin } from '../actions/auth'
-import default_pic from '../assets/default_avi.png'
+import default_pic from '../assets/default_avi.jpg'
 import { history } from '../routers/AppRouter'
 
 const UserForm = ({ title, startLogin }) => {

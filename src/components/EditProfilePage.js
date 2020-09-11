@@ -102,13 +102,13 @@ const EditProfilePage = ({ user, startEditProfile }) => {
 								autoFocus
 							/>
 						</div>
-						<div className="field">
+						{/* <div className="field">
 							<label>Avatar</label>
 							<input
 								type="file"
 								onChange={onAviChange}
 							/>
-						</div>
+						</div> */}
 						<button className='ui teal right floated small submit button' type='submit'>
 							Update Profile
 						</button>
