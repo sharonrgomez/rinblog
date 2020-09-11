@@ -1,0 +1,38 @@
+// menu items
+#navbar {
+    margin-bottom: 5.2rem;
+    .item {
+        border: none;
+    }
+    .item.desktop {
+        display: none;
+        @media (min-width: $mobile-breakpt) {
+            display: flex;
+        }
+    }
+    .item.mobile {
+        display: flex;
+        @media (min-width: $mobile-breakpt) {
+            display: none;
+        }
+    }
+    .navbar__avatar {
+        padding: 0.6rem 1rem;
+    }
+
+// mobile menu modal
+    .mobile-menu {
+        background: $dark;
+        color: $off-white;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        position: absolute;
+        top: 48.3px;
+        width: 100%;
+        transition: height 1s ease-in-out;
+        @media (min-width: $mobile-breakpt) {
+            display: none;
+        }
+    }
+}

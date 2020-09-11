@@ -1,0 +1,54 @@
+.details .display-pic__container {
+	width: $l-size;
+	height: $l-size;
+	margin-left: $xs-size;
+	border-radius: 50%;
+	flex-shrink: 0;
+	overflow: hidden;
+	.display-pic {
+		max-width: 100%;
+		object-fit: cover;
+	}
+}
+
+div.ui.inverted.menu .item .display-pic__container {
+	width: $l-size;
+	height: $l-size;
+	border-radius: 50%;
+	flex-shrink: 0;
+	overflow: hidden;
+	.display-pic {
+		max-width: 100%;
+		object-fit: cover;
+	}
+}
+
+.content-container .ui.large.header .display-pic__container {
+	width: $xl-size;
+	height: $xl-size;
+	border-radius: 50%;
+	flex-shrink: 0;
+	margin-left: 1rem;
+	overflow: hidden;
+	@media (min-width: 450px) {
+		width: $xxl-size;
+		height: $xxl-size;
+	}
+	.display-pic {
+		max-width: 100%;
+		object-fit: cover;
+	}
+}
+
+// current user avatar
+.placeholder__container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	.placeholder__square {
+		display: inline-block;
+		width: $l-size;
+		border-radius: 50%;
+		overflow: hidden;
+	}
+}

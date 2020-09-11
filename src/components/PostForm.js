@@ -56,7 +56,6 @@ const PostForm = ({ onSubmit, onRemove, post, showRemoveButton, header }) => {
                             <button className='ui teal right floated small submit button' type='submit'>
                                 {showRemoveButton ? 'Update' : 'Add Post'}
                             </button>
-
                             {showRemoveButton
                                 &&
                                 <button

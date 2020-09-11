@@ -1,7 +1,7 @@
 import React from 'react'
 
 const PlaceholderPost = () => (
-	<>
+	<div id='placeholder__posts'>
 		<div className='ui raised segment'>
 			<div className='ui placeholder'>
 				<div className='header'>
@@ -22,7 +22,7 @@ const PlaceholderPost = () => (
 				</div>
 			</div>
 		</div>
-	</>
+	</div>
 )
 
 export default PlaceholderPost

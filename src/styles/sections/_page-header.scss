@@ -1,0 +1,24 @@
+#page-header {
+	.content-container {
+		.ui.large.header {
+			&.page-header__content {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				margin: 0 $s-size;
+				font-size: $l-size;
+			}
+			&.no-flex {
+				display: flex;
+				justify-content: space-between;
+				margin: 0 $s-size;
+			}
+		}
+		.no-posts {
+			display: flex;
+			height: 35vh;
+			justify-content: center;
+			align-items: center;
+		}
+	}
+}

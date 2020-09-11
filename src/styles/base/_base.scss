@@ -1,0 +1,19 @@
+body {
+    height: auto !important;
+
+}
+
+button {
+    cursor: pointer;
+}
+
+button:disabled {
+    cursor: default;
+}
+
+.links {
+	color: $accent;
+	&:hover {
+		color: $accent-alt;
+	}
+}

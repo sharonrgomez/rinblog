@@ -1,0 +1,38 @@
+.post-list__header {
+	display: flex;
+	flex-direction: column;
+	word-break: break-word;
+	.links {
+		font-size: 1rem;
+	}
+}
+
+#post-list__post {
+	padding-bottom: $xs-size;
+	&:last-child {
+		margin-bottom: $s-size;
+	}
+	.header {
+		word-wrap: break-word;
+	}
+	.post-body {
+		margin: 1em 0 0.5em;
+		word-wrap: break-word;
+		white-space: pre-wrap;
+	}
+	.divider {
+		margin: $m-size 0 $xs-size 0;
+	}
+	.details {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		.date {
+			color: $med;
+		}
+		.links {
+			display: flex;
+			align-items: center;
+		}
+	}
+}

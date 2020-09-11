@@ -1,0 +1,10 @@
+.content-container {
+	margin: $s-size auto 0;
+	width: 95%;
+	@media (min-width: $tablet-breakpt) {
+		width: 60%;
+	}
+	@media (min-width: $desktop-breakpt) {
+		width: 45%;
+	}
+}

@@ -32,7 +32,7 @@ const Header = ({history}) => {
     }, [showMobileMenu])
 
     return (
-        <nav className='Header' ref={nodeRef}>
+        <nav id='navbar' ref={nodeRef}>
             <div className='ui fixed inverted menu'>
                 <div className='ui container'>
                     <Link className='header item' to='/'>

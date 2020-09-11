@@ -50,7 +50,7 @@ const MenuItems = ({ isAuthenticated, startLogout, showOnDesktop, user, redirect
                         <button className={itemClass} onClick={redirect('/')}>Home</button>
                         <button className={itemClass} onClick={redirect('/create')}>Create Post</button>
                         <button className={itemClass} onClick={logoutAndRedirect}>Logout</button>
-                        <button className={itemClass} onClick={redirect('/me')}>
+                        <button className={`${itemClass} navbar__avatar`} onClick={redirect('/me')}>
                             {!isLoaded
                                 ? (
                                     <div className='placeholder__container'>

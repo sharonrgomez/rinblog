@@ -79,72 +79,69 @@ const UserForm = ({ title, startLogin }) => {
 	}
 
 	return (
-		<>
-			<div className='user-form'>
-				<div className='ui container clearing raised segment'>
-					<div className='ui large header'>{title}</div>
-					{error && <p className='ui error message'>{error}</p>}
-					<div className='ui form container'>
-						<form
-							autoComplete="off"
-							className='form'
-							onSubmit={title === 'Sign Up' ? handleSignUp : handleLogin}
+		<div className='user-form'>
+			<div className='ui container clearing raised segment'>
+				<div className='ui large header'>{title}</div>
+				{error && <p className='ui error message'>{error}</p>}
+				<div className='ui form container'>
+					<form
+						autoComplete="off"
+						className='form'
+						onSubmit={title === 'Sign Up' ? handleSignUp : handleLogin}
+					>
+						{title === 'Sign Up' &&
+							<div className='field'>
+								<label>Username</label>
+								<input
+									value={username}
+									onChange={(e) => setUsername(e.target.value)}
+									name='username'
+									type='text'
+								/>
+							</div>
+						}
+
+						<div className='field'>
+							<label>E-mail</label>
+							<input
+								value={email}
+								onChange={(e) => setEmail(e.target.value)}
+								name='email'
+								type='email'
+							/>
+						</div>
+
+						<div className='field'>
+							<label>Password</label>
+							<input
+								value={password}
+								onChange={(e) => setPassword(e.target.value)}
+								name='password'
+								type='password'
+							/>
+						</div>
+
+						<button
+							className='fluid ui teal small submit button'
+							type='submit'
 						>
+							{title}
+						</button>
 
-							{title === 'Sign Up' &&
-								<div className='field'>
-									<label>Username</label>
-									<input
-										value={username}
-										onChange={(e) => setUsername(e.target.value)}
-										name='username'
-										type='text'
-									/>
-								</div>
-							}
+						<div className='ui divider'></div>
 
-							<div className='field'>
-								<label>E-mail</label>
-								<input
-									value={email}
-									onChange={(e) => setEmail(e.target.value)}
-									name='email'
-									type='email'
-								/>
-							</div>
-
-							<div className='field'>
-								<label>Password</label>
-								<input
-									value={password}
-									onChange={(e) => setPassword(e.target.value)}
-									name='password'
-									type='password'
-								/>
-							</div>
-
-							<button
-								className='fluid ui teal small submit button'
-								type='submit'
-							>
-								{title}
-							</button>
-
-							<div className='ui divider'></div>
-
-							<button
-								className='fluid ui small google plus button'
-								type='button'
-								onClick={startLogin}
-							>
-								<i className="google icon"></i>
+						<button
+							className='fluid ui small google plus button'
+							type='button'
+							onClick={startLogin}
+						>
+							<i className="google icon"></i>
 								Login with Google
 							</button>
-						</form>
-					</div>
+					</form>
 				</div>
 			</div>
-		</>
+		</div>
 	)
 }
 

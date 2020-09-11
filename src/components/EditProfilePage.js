@@ -102,10 +102,6 @@ const EditProfilePage = ({ user, startEditProfile }) => {
 								autoFocus
 							/>
 						</div>
-						{/* <div className="field">
-							<label>Password</label>
-							<input type="password" />
-						</div> */}
 						<div className="field">
 							<label>Avatar</label>
 							<input

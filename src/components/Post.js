@@ -24,7 +24,7 @@ const Post = ({ title, body, createdAt, id, ownsPost, isViewingProfile, user, on
     }, [user])
 
     return (
-        <article className='ui container clearing raised segment post-list__post'>
+        <article id='post-list__post' className='ui container clearing raised segment'>
             <div className='ui large header'>
                 {title}
             </div>
@@ -40,19 +40,19 @@ const Post = ({ title, body, createdAt, id, ownsPost, isViewingProfile, user, on
                     : body
                 }
             </p>
-
             <div className='ui divider'></div>
             <div className='details'>
                 <div className='date'>{formatDistanceStrict(createdAt, Date.now())} ago</div>
                 {/* if post belongs to current user, show edit link.
                     if not, show username. 
                     on profile pages, do not show either. */}
-                {ownsPost
-                    ? <Link to={`/edit/${id}`} className='links'>Edit</Link>
-                    : !isViewingProfile &&
-                    <Link to={`/user/${user}`} className='links'>
-                        <UserAvatar src={avi} username={displayName} isCurrentUser={false} /><span> {displayName}</span>
-                    </Link>
+                {
+                    ownsPost
+                        ? <Link to={`/edit/${id}`} className='links'>Edit</Link>
+                        : !isViewingProfile &&
+                        <Link to={`/user/${user}`} className='links'>
+                            <span>@{displayName}</span><UserAvatar src={avi} username={displayName} isCurrentUser={false} />
+                        </Link>
                 }
             </div>
         </article >

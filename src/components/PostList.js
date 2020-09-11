@@ -33,29 +33,29 @@ const PostList = ({ startSetAllPosts, startSetPosts, getAllPosts, getUserPosts, 
 		return () => setIsMounted(false)
 	}, [match, user, getAllPosts, getUserPosts])
 
-
 	const getUserInfo = (user) => {
-		startSetPosts(user).then(() => {
-			firebase
-				.database()
-				.ref('users/' + user + '/user_info')
-				.once('value', (snapshot) => {
-					setDisplayName(snapshot.val().display_name)
-					setAvi(snapshot.val().display_pic)
-				})
-				.then(() => {
-					setIsLoaded(true)
-				})
-		})
+		startSetPosts(user)
+			.then(() => {
+				firebase
+					.database()
+					.ref('users/' + user + '/user_info')
+					.once('value', (snapshot) => {
+						setDisplayName(snapshot.val().display_name)
+						setAvi(snapshot.val().display_pic)
+					})
+					.then(() => {
+						setIsLoaded(true)
+					})
+			})
 	}
 
 	return (
 		<>
-			<div>
+			<div id='page-header'>
 				<div className='content-container'>
 					{!isLoaded && !getAllPosts
 						? (
-							<div className='placeholder__container'>
+							<div id='placeholder__page-header' className='placeholder__container'>
 								<div className='placeholder__line'>
 									<div className='ui placeholder'>
 										<div className='long line'></div>
@@ -71,21 +71,22 @@ const PostList = ({ startSetAllPosts, startSetPosts, getAllPosts, getUserPosts, 
 							</div>
 						)
 						: (
-							<span className='ui large header page-header'>
+							<span className='ui large header page-header__content'>
 								{
+									// make this a component
 									getAllPosts
 										? 'Home'
 										: getUserPosts
 											? (
 												<>
-													{displayName}'s Blog
+													{displayName}
 													<UserAvatar src={avi} username={displayName} isCurrentUser={false} />
 												</>
 											)
 											: (
 												<>
-													<div className='links__profile'>
-														{displayName}'s Blog
+													<div className='post-list__header'>
+														{displayName}
 														<Link to='/edit/profile' className='links'>Edit Profile</Link>
 													</div>
 													<UserAvatar src={avi} username={displayName} isCurrentUser={true} />
@@ -97,10 +98,11 @@ const PostList = ({ startSetAllPosts, startSetPosts, getAllPosts, getUserPosts, 
 					}
 				</div>
 			</div>
+
 			<div className='content-container'>
 				{!isLoaded
 					? (
-						[...Array(5)].map((v, i) => (
+						[...Array(3)].map((v, i) => (
 							<PlaceholderPost key={i} />
 						))
 					)
