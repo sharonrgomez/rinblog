@@ -12,7 +12,7 @@
 		}
 		.long.line {
 			height: 0;
-			margin-top: 1rem;
+			margin-top: $xs-size;
 		}
 	}
 	.placeholder__square {
@@ -20,25 +20,34 @@
 		width: $xl-size;
 		border-radius: 50%;
 		overflow: hidden;
+		@media (min-width: $sm-mobile-breakpt) {
+			width: $xxl-size;
+			height: $xxl-size;
+		}
 	}
 }
 
 // posts placeholders
 #placeholder__posts {
-	margin-bottom: 1rem;
-	.ui.placeholder:first-child {
-		max-width: 100%;
-		.header .line {
-			margin-top: $s-size;
-		}
-	}
-	.ui.placeholder:last-child {
-		max-width: 100%;
+	margin-bottom: $xs-size;
+
 		.placeholder__square {
 			display: inline-block;
 			width: $l-size;
 			border-radius: 50%;
 			overflow: hidden;
 		}
+}
+
+// current user avatar
+.placeholder__container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	.placeholder__square {
+		display: inline-block;
+		width: $l-size;
+		border-radius: 50%;
+		overflow: hidden;
 	}
 }

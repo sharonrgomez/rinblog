@@ -1,7 +1,7 @@
 import React from 'react'
 
 const PlaceholderPost = () => (
-	<div id='placeholder__posts'>
+	<div id='placeholder__posts' className='ui container '>
 		<div className='ui raised segment'>
 			<div className='ui placeholder'>
 				<div className='header'>

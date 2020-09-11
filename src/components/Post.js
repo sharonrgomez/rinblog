@@ -42,18 +42,18 @@ const Post = ({ title, body, createdAt, id, ownsPost, isViewingProfile, user, on
             </p>
             <div className='ui divider'></div>
             <div className='details'>
-                <div className='date'>{formatDistanceStrict(createdAt, Date.now())} ago</div>
                 {/* if post belongs to current user, show edit link.
                     if not, show username. 
-                    on profile pages, do not show either. */}
+                on profile pages, do not show either. */}
                 {
                     ownsPost
                         ? <Link to={`/edit/${id}`} className='links'>Edit</Link>
                         : !isViewingProfile &&
                         <Link to={`/user/${user}`} className='links'>
-                            <span>@{displayName}</span><UserAvatar src={avi} username={displayName} isCurrentUser={false} />
+                            <UserAvatar src={avi} username={displayName} isCurrentUser={false} /><span>@{displayName}</span>
                         </Link>
                 }
+                <div className='date'>{formatDistanceStrict(createdAt, Date.now())} ago</div>
             </div>
         </article >
     )
