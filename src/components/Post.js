@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { firebase } from '../firebase/firebase'
+import database, { storage } from '../firebase/firebase'
 import { formatDistanceStrict } from 'date-fns'
 import UserAvatar from './UserAvatar'
 
@@ -8,20 +8,29 @@ const Post = ({ title, body, createdAt, id, ownsPost, isViewingProfile, user, on
     const [displayName, setDisplayName] = useState('')
     const [avi, setAvi] = useState('')
     const [isMounted, setIsMounted] = useState(true)
+    // const [isLoaded, setIsLoaded] = useState(false)
 
     useEffect(() => {
         setIsMounted(true)
         if (isMounted) {
-            firebase
-                .database()
+            database
                 .ref(`users/${user}`)
                 .once('value', (snapshot) => {
                     setDisplayName(snapshot.val().user_info.display_name)
-                    if (snapshot.val().user_info.display_pic) {
-                        setAvi(snapshot.val().user_info.display_pic)
-                    } else {
-                        setAvi('https://i.imgur.com/DLiQvK4.jpg')
-                    }
+                    // setIsLoaded(true)
+
+                })
+            storage
+                .ref(user)
+                .child('display_pic')
+                .getDownloadURL()
+                .then((url) => {
+                    setAvi(url)
+                    // setIsLoaded(true)
+                })
+                .catch((error) => {
+                    setAvi('https://i.imgur.com/DLiQvK4.jpg')
+                    // setIsLoaded(true)
                 })
         }
         return () => setIsMounted(false)

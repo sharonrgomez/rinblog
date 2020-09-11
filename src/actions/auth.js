@@ -13,7 +13,7 @@ export const startLogin = () => {
             .signInWithPopup(googleAuthProvider)
             .then((res) => {
                 if (res.additionalUserInfo.isNewUser) {
-                    firebase.database().ref('users/' + res.user.uid + '/user_info').set({
+                    database.ref('users/' + res.user.uid + '/user_info').set({
                         display_name: res.user.email
                     })
                 }

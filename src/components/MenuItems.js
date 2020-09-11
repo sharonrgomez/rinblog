@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
-import { firebase } from '../firebase/firebase'
+import database, { storage } from '../firebase/firebase'
 import UserAvatar from './UserAvatar'
 import { startLogout } from '../actions/auth'
 
@@ -15,28 +15,22 @@ const MenuItems = ({ isAuthenticated, startLogout, showOnDesktop, user, redirect
         // let getAvatar
         if (isMounted) {
             if (user) {
-                // getAvatar = (
-                firebase
-                    .database()
-                    .ref('users/' + user + '/user_info')
-                    .once('value', (snapshot) => {
-                        if (snapshot.val().display_pic) {
-                            setAvi(snapshot.val().display_pic)
-                        } else {
-                            setAvi('https://i.imgur.com/DLiQvK4.jpg')
-                        }
-                    })
-                    .then(() => {
+                storage
+                    .ref(user)
+                    .child('display_pic')
+                    .getDownloadURL()
+                    .then((url) => {
+                        setAvi(url)
                         setIsLoaded(true)
                     })
-                // )
+                    .catch((error) => {
+                        setAvi('https://i.imgur.com/DLiQvK4.jpg')
+                        setIsLoaded(true)
+                    })
             }
         }
         return () => {
             setIsMounted(false)
-            // if (!user && getAvatar) {
-            //     getAvatar.off()
-            // }
         }
     }, [user])
 

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { firebase } from '../firebase/firebase'
+import database, { storage } from '../firebase/firebase'
 import { compareDesc } from 'date-fns'
 import Post from './Post'
 import UserAvatar from './UserAvatar'
@@ -36,17 +36,37 @@ const PostList = ({ startSetAllPosts, startSetPosts, getAllPosts, getUserPosts, 
 	const getUserInfo = (user) => {
 		startSetPosts(user)
 			.then(() => {
-				firebase
-					.database()
-					.ref('users/' + user + '/user_info')
-					.once('value', (snapshot) => {
-						setDisplayName(snapshot.val().display_name)
-						if (snapshot.val().display_pic) {
-							setAvi(snapshot.val().display_pic)
-						} else {
-							setAvi('https://i.imgur.com/DLiQvK4.jpg')
-						}
-					})
+				const getUsernamePromise = (
+					database
+						.ref('users/' + user + '/user_info')
+						.once('value', (snapshot) => {
+							setDisplayName(snapshot.val().display_name)
+						})
+				)
+
+				const getAvatarPromise = (
+					storage
+						.ref(user)
+						.listAll()
+						.then((res) => {
+							if (res.items.length > 0) {
+								storage
+									.ref(user)
+									.child('display_pic')
+									.getDownloadURL()
+									.then((url) => {
+										setAvi(url)
+									})
+									.catch((error) => {
+										setAvi('https://i.imgur.com/DLiQvK4.jpg')
+									})
+							} else {
+								setAvi('https://i.imgur.com/DLiQvK4.jpg')
+							}
+						})
+				)
+
+				Promise.all([getUsernamePromise, getAvatarPromise])
 					.then(() => {
 						setIsLoaded(true)
 					})

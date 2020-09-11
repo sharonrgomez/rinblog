@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
-import { firebase } from '../firebase/firebase'
+import database, { storage } from '../firebase/firebase'
 import { startEditProfile } from '../actions/auth'
-import { history } from '../routers/AppRouter'
 
 
-const EditProfilePage = ({ user, startEditProfile }) => {
+const EditProfilePage = ({ user, startEditProfile, history }) => {
 	const [error, setError] = useState('')
 	const [username, setUsername] = useState('')
 	const [avi, setAvi] = useState('')
@@ -14,16 +13,13 @@ const EditProfilePage = ({ user, startEditProfile }) => {
 	useEffect(() => {
 		setIsMounted(true)
 		if (isMounted && user) {
-			firebase
-				.database()
+			database
 				.ref('users/' + user + '/user_info')
 				.once('value', (snapshot) => {
 					if (snapshot.val()) {
 						setUsername(snapshot.val().display_name)
 					}
 				})
-
-
 		}
 		return () => setIsMounted(false)
 	}, [user])
@@ -33,33 +29,27 @@ const EditProfilePage = ({ user, startEditProfile }) => {
 	}
 
 	const onAviChange = (e) => {
-		const file = e.target.files[0]
-		// const reader = new FileReader()
-
-		// reader.addEventListener('load', function () {
-		// 	// convert image file to base64 string
-		// 	setAvi(reader.result)
-		// }, false)
-
-		// if (file) {
-		// 	reader.readAsDataURL(file)
-		// }
+		setAvi(e.target.files[0])
 	}
 
-	const onSubmit = (updates) => {
-		startEditProfile(updates)
+	const handleSubmitAvatar = (e) => {
+		e.preventDefault()
+		storage
+			.ref(user)
+			.child('display_pic')
+			.put(avi, { contentType: avi.type })
 			.then(() => {
 				history.push('/me')
 			})
+
 	}
 
-	const handleSubmit = (e) => {
+	const handleSubmitUsername = (e) => {
 		e.preventDefault()
 
 		// check if username already exists
 		if (username) {
-			firebase
-				.database()
+			database
 				.ref('users/')
 				.once('value', (snapshot) => {
 					let hasMatch = false
@@ -72,10 +62,10 @@ const EditProfilePage = ({ user, startEditProfile }) => {
 						}
 					}
 					if (!hasMatch) {
-						onSubmit({
-							display_name: username,
-							display_pic: avi
+						startEditProfile({
+							display_name: username
 						})
+						history.push('/')
 					} else {
 						setError('That username already exists.')
 					}
@@ -91,25 +81,30 @@ const EditProfilePage = ({ user, startEditProfile }) => {
 				<div className='ui large header'>Edit Profile</div>
 				{error && <p className='ui error message'>{error}</p>}
 				<div className='ui form container'>
-					<form className='form' onSubmit={handleSubmit}>
-						<div className="field">
+					<form className='form' onSubmit={handleSubmitUsername}>
+						<div className='field'>
 							<label>Username</label>
 							<input
-								type="text"
+								type='text'
 								value={username}
 								onChange={onUsernameChange}
 								autoFocus
 							/>
 						</div>
-						{/* <div className="field">
+						<button className='ui teal right floated small submit button' type='submit'>
+							Update
+						</button>
+					</form>
+					<form className='form' onSubmit={handleSubmitAvatar}>
+						<div className='field'>
 							<label>Avatar</label>
 							<input
-								type="file"
+								type='file'
 								onChange={onAviChange}
 							/>
-						</div> */}
+						</div>
 						<button className='ui teal right floated small submit button' type='submit'>
-							Update Profile
+							Update
 						</button>
 					</form>
 				</div>

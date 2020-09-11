@@ -1,6 +1,6 @@
-import React, { createContext } from 'react'
 import * as firebase from 'firebase/app'
 import 'firebase/database'
+import 'firebase/storage'
 import 'firebase/auth'
 
 const firebaseConfig = {
@@ -16,6 +16,7 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig)
 
 const database = firebase.database()
+const storage = firebase.storage()
 const googleAuthProvider = new firebase.auth.GoogleAuthProvider()
 
-export { firebase, googleAuthProvider, database as default }
+export { firebase, storage, googleAuthProvider, database as default }

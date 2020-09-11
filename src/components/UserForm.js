@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
-import { firebase } from '../firebase/firebase'
+import database, { firebase } from '../firebase/firebase'
 import { startLogin } from '../actions/auth'
 import { history } from '../routers/AppRouter'
 
@@ -15,8 +15,7 @@ const UserForm = ({ title, startLogin }) => {
 			.auth()
 			.createUserWithEmailAndPassword(email, password)
 			.then((res) => {
-				firebase
-					.database()
+				database
 					.ref('users/' + res.user.uid + '/user_info')
 					.set({
 						display_name: username
@@ -34,8 +33,7 @@ const UserForm = ({ title, startLogin }) => {
 		e.preventDefault()
 		if (username.length > 2) {
 			// first get users from db
-			firebase
-				.database()
+			database
 				.ref('users/')
 				.once('value', (snapshot) => {
 					// if there's users in db, loop through them
@@ -83,7 +81,7 @@ const UserForm = ({ title, startLogin }) => {
 				{error && <p className='ui error message'>{error}</p>}
 				<div className='ui form container'>
 					<form
-						autoComplete="off"
+						autoComplete='off'
 						className='form'
 						onSubmit={title === 'Sign Up' ? handleSignUp : handleLogin}
 					>
@@ -133,7 +131,7 @@ const UserForm = ({ title, startLogin }) => {
 							type='button'
 							onClick={startLogin}
 						>
-							<i className="google icon"></i>
+							<i className='google icon'></i>
 								Login with Google
 							</button>
 					</form>
