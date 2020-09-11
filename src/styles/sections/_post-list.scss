@@ -3,7 +3,12 @@
 	flex-direction: column;
 	word-break: break-word;
 	.links {
+		line-height: 2rem;
+		text-align: center;
 		font-size: $xs-size;
+		@media (min-width: $mobile-breakpt) {
+			text-align: left;
+		}
 	}
 }
 

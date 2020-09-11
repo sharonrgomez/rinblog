@@ -1,18 +1,14 @@
 #page-header {
-	.content-container {
-		.ui.large.header {
-			&.page-header__content {
-				display: flex;
-				align-items: center;
-				justify-content: space-between;
-				margin: 0 $s-size;
-				font-size: $l-size;
-			}
-			&.no-flex {
-				display: flex;
-				justify-content: space-between;
-				margin: 0 $s-size;
-			}
+	.page-header__content {
+		display: flex;
+		flex-direction: column-reverse;
+		justify-content: center;
+		align-items: center;
+		margin: 0 $s-size;
+		font-size: $l-size;
+		@media (min-width: $mobile-breakpt) {
+			flex-direction: row;
+			justify-content: space-between;
 		}
 	}
 }

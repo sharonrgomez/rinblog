@@ -31,7 +31,7 @@ const UserForm = ({ title, startLogin }) => {
 
 	const handleSignUp = (e) => {
 		e.preventDefault()
-		if (username.length > 2) {
+		if (username.length > 2 || username.length < 16) {
 			// first get users from db
 			database
 				.ref('users/')
@@ -57,7 +57,7 @@ const UserForm = ({ title, startLogin }) => {
 					}
 				})
 		} else {
-			setError('Username must be greater than 3 characters.')
+			setError('Username length must be between 3 and 15 characters.')
 		}
 	}
 
