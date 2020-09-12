@@ -7,10 +7,10 @@ import Post from './Post'
 import UserAvatar from './UserAvatar'
 import PlaceholderPost from './PlaceholderPost'
 import { startSetAllPosts, startSetPosts } from '../actions/posts'
+import { startSetImageURL } from '../actions/avatar'
 
-const PostList = ({ startSetAllPosts, startSetPosts, getAllPosts, getUserPosts, posts, user, match }) => {
+const PostList = ({ startSetAllPosts, startSetPosts, startSetImageURL, getAllPosts, getUserPosts, posts, user, avatar, match }) => {
 	const [displayName, setDisplayName] = useState('')
-	const [avi, setAvi] = useState('')
 	const [isMounted, setIsMounted] = useState(true)
 	const [isLoaded, setIsLoaded] = useState(false)
 
@@ -36,6 +36,8 @@ const PostList = ({ startSetAllPosts, startSetPosts, getAllPosts, getUserPosts, 
 	const getUserInfo = (user) => {
 		startSetPosts(user)
 			.then(() => {
+				const promises = []
+
 				const getUsernamePromise = (
 					database
 						.ref('users/' + user + '/user_info')
@@ -45,6 +47,7 @@ const PostList = ({ startSetAllPosts, startSetPosts, getAllPosts, getUserPosts, 
 				)
 
 				const getAvatarPromise = (
+					!avatar &&
 					storage
 						.ref(user)
 						.listAll()
@@ -55,18 +58,20 @@ const PostList = ({ startSetAllPosts, startSetPosts, getAllPosts, getUserPosts, 
 									.child('display_pic')
 									.getDownloadURL()
 									.then((url) => {
-										setAvi(url)
+										startSetImageURL(user, url)
 									})
 									.catch((error) => {
-										setAvi('https://i.imgur.com/DLiQvK4.jpg')
+										startSetImageURL(user, 'https://i.imgur.com/DLiQvK4.jpg')
 									})
 							} else {
-								setAvi('https://i.imgur.com/DLiQvK4.jpg')
+								startSetImageURL(user, 'https://i.imgur.com/DLiQvK4.jpg')
 							}
 						})
 				)
+				promises.push(getUsernamePromise, (!avatar && getAvatarPromise))
+				console.log(promises)
 
-				Promise.all([getUsernamePromise, getAvatarPromise])
+				Promise.all(promises)
 					.then(() => {
 						setIsLoaded(true)
 					})
@@ -104,7 +109,7 @@ const PostList = ({ startSetAllPosts, startSetPosts, getAllPosts, getUserPosts, 
 											? (
 												<>
 													{displayName}
-													<UserAvatar src={avi} username={displayName} isCurrentUser={false} />
+													<UserAvatar src={avatar} username={displayName} isCurrentUser={false} />
 												</>
 											)
 											: (
@@ -113,7 +118,7 @@ const PostList = ({ startSetAllPosts, startSetPosts, getAllPosts, getUserPosts, 
 														{displayName}
 														<Link to='/edit/profile' className='links'>Edit Profile</Link>
 													</div>
-													<UserAvatar src={avi} username={displayName} isCurrentUser={true} />
+													<UserAvatar src={avatar} username={displayName} isCurrentUser={true} />
 												</>
 											)
 								}
@@ -161,14 +166,26 @@ const PostList = ({ startSetAllPosts, startSetPosts, getAllPosts, getUserPosts, 
 	)
 }
 
-const mapStateToProps = (state) => ({
-	posts: state.posts,
-	user: state.auth.uid
-})
+const mapStateToProps = (state, ownProps) => {
+	let userId;
+	if (ownProps.getAllPosts) {
+		userId = null
+	} else if (ownProps.getUserPosts) {
+		userId = ownProps.match.params.id
+	} else {
+		userId = state.auth.uid
+	}
+	return {
+		posts: state.posts,
+		user: state.auth.uid,
+		avatar: state.avatar[userId]
+	}
+}
 
 const mapDispatchToProps = (dispatch) => ({
 	startSetAllPosts: () => dispatch(startSetAllPosts()),
-	startSetPosts: (user) => dispatch(startSetPosts(user))
+	startSetPosts: (user) => dispatch(startSetPosts(user)),
+	startSetImageURL: (user, url) => dispatch(startSetImageURL(user, url))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostList)
