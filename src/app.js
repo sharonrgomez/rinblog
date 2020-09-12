@@ -4,7 +4,7 @@ import { Provider } from 'react-redux'
 import { firebase } from './firebase/firebase'
 import LoadingPage from './components/LoadingPage'
 import configureStore from './store/configureStore'
-import AppRouter, { history } from './routers/AppRouter'
+import AppRouter from './routers/AppRouter'
 import { login, logout } from './actions/auth'
 import 'normalize.css/normalize.css'
 import './styles/styles.scss'
@@ -33,6 +33,6 @@ firebase.auth().onAuthStateChanged((user) => {
         store.dispatch(login(user.uid))
     } else {
         store.dispatch(logout())
-    }   
+    }
     renderApp()
 })
