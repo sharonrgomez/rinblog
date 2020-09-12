@@ -3,31 +3,35 @@ import { connect } from 'react-redux'
 import database, { storage } from '../firebase/firebase'
 import UserAvatar from './UserAvatar'
 import { startLogout } from '../actions/auth'
+import { startSetImageURL } from '../actions/avatar'
 
-const MenuItems = ({ isAuthenticated, startLogout, showOnDesktop, user, redirect }) => {
+const MenuItems = ({ isAuthenticated, startLogout, startSetImageURL, showOnDesktop, user, avatar, redirect }) => {
     const itemClass = showOnDesktop ? 'item desktop' : 'item'
-    const [avi, setAvi] = useState('')
     const [isMounted, setIsMounted] = useState(true)
     const [isLoaded, setIsLoaded] = useState(false)
 
     useEffect(() => {
         setIsMounted(true)
         // let getAvatar
-        if (isMounted) {
-            if (user) {
-                storage
-                    .ref(user)
-                    .child('display_pic')
-                    .getDownloadURL()
-                    .then((url) => {
-                        setAvi(url)
-                        setIsLoaded(true)
-                    })
-                    .catch((error) => {
-                        setAvi('https://i.imgur.com/DLiQvK4.jpg')
-                        setIsLoaded(true)
-                    })
-            }
+        if (isMounted && user) {
+            !avatar
+                ? (
+                    storage
+                        .ref(user)
+                        .child('display_pic')
+                        .getDownloadURL()
+                        .then((url) => {
+                            startSetImageURL(user, url)
+                            setIsLoaded(true)
+
+                        })
+                        .catch((error) => {
+                            startSetImageURL(user, 'https://i.imgur.com/DLiQvK4.jpg')
+                            setIsLoaded(true)
+
+                        })
+                )
+                : setIsLoaded(true)
         }
         return () => {
             setIsMounted(false)
@@ -57,7 +61,7 @@ const MenuItems = ({ isAuthenticated, startLogout, showOnDesktop, user, redirect
                                         </div>
                                     </div>
                                 )
-                                : <UserAvatar src={avi} isCurrentUser={true} />
+                                : <UserAvatar src={avatar} isCurrentUser={true} />
                             }
                         </button>
                     </>
@@ -77,12 +81,14 @@ const MenuItems = ({ isAuthenticated, startLogout, showOnDesktop, user, redirect
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    startLogout: () => dispatch(startLogout())
+    startLogout: () => dispatch(startLogout()),
+    startSetImageURL: (user, url) => dispatch(startSetImageURL(user, url))
 })
 
 const mapStateToProps = (state) => ({
     isAuthenticated: !!state.auth.uid,
-    user: state.auth.uid
+    user: state.auth.uid,
+    avatar: state.avatar[state.auth.uid]
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(MenuItems)

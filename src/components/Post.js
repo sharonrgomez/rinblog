@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
+import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import database, { storage } from '../firebase/firebase'
 import { formatDistanceStrict } from 'date-fns'
 import UserAvatar from './UserAvatar'
+import { startSetImageURL } from '../actions/avatar'
 
-const Post = ({ title, body, createdAt, id, ownsPost, isViewingProfile, user, onViewPage }) => {
+const Post = ({ startSetImageURL, title, body, createdAt, id, ownsPost, isViewingProfile, user, avatar, onViewPage }) => {
     const [displayName, setDisplayName] = useState('')
-    const [avi, setAvi] = useState('')
     const [isMounted, setIsMounted] = useState(true)
     // const [isLoaded, setIsLoaded] = useState(false)
 
@@ -20,18 +21,20 @@ const Post = ({ title, body, createdAt, id, ownsPost, isViewingProfile, user, on
                     // setIsLoaded(true)
 
                 })
-            storage
-                .ref(user)
-                .child('display_pic')
-                .getDownloadURL()
-                .then((url) => {
-                    setAvi(url)
-                    // setIsLoaded(true)
-                })
-                .catch((error) => {
-                    setAvi('https://i.imgur.com/DLiQvK4.jpg')
-                    // setIsLoaded(true)
-                })
+            !avatar && (
+                storage
+                    .ref(user)
+                    .child('display_pic')
+                    .getDownloadURL()
+                    .then((url) => {
+                        startSetImageURL(user, url)
+                        // setIsLoaded(true)
+                    })
+                    .catch((error) => {
+                        startSetImageURL(user, 'https://i.imgur.com/DLiQvK4.jpg')
+                        // setIsLoaded(true)
+                    })
+            )
         }
         return () => setIsMounted(false)
     }, [user])
@@ -63,7 +66,7 @@ const Post = ({ title, body, createdAt, id, ownsPost, isViewingProfile, user, on
                         ? <Link to={`/edit/${id}`} className='links'>Edit</Link>
                         : !isViewingProfile &&
                         <Link to={`/user/${user}`} className='links'>
-                            <UserAvatar src={avi} username={displayName} isCurrentUser={false} /><span>@{displayName}</span>
+                            <UserAvatar src={avatar} username={displayName} isCurrentUser={false} /><span>@{displayName}</span>
                         </Link>
                 }
                 <div className='date'>{formatDistanceStrict(createdAt, Date.now())} ago</div>
@@ -72,4 +75,12 @@ const Post = ({ title, body, createdAt, id, ownsPost, isViewingProfile, user, on
     )
 }
 
-export default Post
+const mapStateToProps = (state, ownProps) => ({
+    avatar: state.avatar[ownProps.user]
+})
+
+const mapDispatchToProps = (dispatch) => ({
+    startSetImageURL: (user, url) => dispatch(startSetImageURL(user, url))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Post)

@@ -68,9 +68,8 @@ const PostList = ({ startSetAllPosts, startSetPosts, startSetImageURL, getAllPos
 							}
 						})
 				)
+				
 				promises.push(getUsernamePromise, (!avatar && getAvatarPromise))
-				console.log(promises)
-
 				Promise.all(promises)
 					.then(() => {
 						setIsLoaded(true)
