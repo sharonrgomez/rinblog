@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
-import database, { firebase } from '../firebase/firebase'
+import database, { firebase } from '../utilities/firebase'
 import { startLogin } from '../actions/auth'
 import { history } from '../routers/AppRouter'
 

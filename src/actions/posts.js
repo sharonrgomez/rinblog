@@ -1,4 +1,4 @@
-import database from '../firebase/firebase'
+import database from '../utilities/firebase'
 export const ADD_POST = 'ADD_POST'
 export const REMOVE_POST = 'REMOVE_POST'
 export const EDIT_POST = 'EDIT_POST'

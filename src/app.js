@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
-import { firebase } from './firebase/firebase'
+import { firebase } from './utilities/firebase'
 import LoadingPage from './components/LoadingPage'
 import configureStore from './store/configureStore'
 import AppRouter from './routers/AppRouter'

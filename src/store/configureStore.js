@@ -4,7 +4,7 @@ import postsReducer from '../reducers/posts'
 import authReducer from '../reducers/auth'
 import avatarReducer from '../reducers/avatar'
 import { loadState, saveState } from './localStorage'
-import { throttle } from './throttle'
+import { throttle } from '../utilities/throttle'
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 

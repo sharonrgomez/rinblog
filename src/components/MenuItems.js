@@ -1,18 +1,17 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
-import database, { storage } from '../firebase/firebase'
+import database, { storage } from '../utilities/firebase'
 import UserAvatar from './UserAvatar'
 import { startLogout } from '../actions/auth'
 import { startSetImageURL } from '../actions/avatar'
 
 const MenuItems = ({ isAuthenticated, startLogout, startSetImageURL, showOnDesktop, user, avatar, redirect }) => {
-    const itemClass = showOnDesktop ? 'item desktop' : 'item'
     const [isMounted, setIsMounted] = useState(true)
     const [isLoaded, setIsLoaded] = useState(false)
+    const itemClass = showOnDesktop ? 'item desktop' : 'item'
 
     useEffect(() => {
         setIsMounted(true)
-        // let getAvatar
         if (isMounted && user) {
             !avatar
                 ? (
@@ -26,9 +25,7 @@ const MenuItems = ({ isAuthenticated, startLogout, startSetImageURL, showOnDeskt
 
                         })
                         .catch((error) => {
-                            startSetImageURL(user, 'https://i.imgur.com/DLiQvK4.jpg')
                             setIsLoaded(true)
-
                         })
                 )
                 : setIsLoaded(true)

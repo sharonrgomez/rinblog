@@ -1,4 +1,4 @@
-import database, { firebase, googleAuthProvider } from '../firebase/firebase'
+import database, { firebase, googleAuthProvider } from '../utilities/firebase'
 import { history } from '../routers/AppRouter'
 
 export const login = (uid) => ({

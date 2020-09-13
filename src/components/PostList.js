@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import database, { storage } from '../firebase/firebase'
+import database, { storage } from '../utilities/firebase'
 import { compareDesc } from 'date-fns'
 import Post from './Post'
 import UserAvatar from './UserAvatar'
@@ -13,6 +13,7 @@ const PostList = ({ startSetAllPosts, startSetPosts, startSetImageURL, getAllPos
 	const [displayName, setDisplayName] = useState('')
 	const [isMounted, setIsMounted] = useState(true)
 	const [isLoaded, setIsLoaded] = useState(false)
+	const defaultAvatar = 'https://i.imgur.com/DLiQvK4.jpg'
 
 	useEffect(() => {
 		setIsMounted(true)
@@ -61,14 +62,12 @@ const PostList = ({ startSetAllPosts, startSetPosts, startSetImageURL, getAllPos
 										startSetImageURL(user, url)
 									})
 									.catch((error) => {
-										startSetImageURL(user, 'https://i.imgur.com/DLiQvK4.jpg')
+										// console.log(error)
 									})
-							} else {
-								startSetImageURL(user, 'https://i.imgur.com/DLiQvK4.jpg')
 							}
 						})
 				)
-				
+
 				promises.push(getUsernamePromise, (!avatar && getAvatarPromise))
 				Promise.all(promises)
 					.then(() => {

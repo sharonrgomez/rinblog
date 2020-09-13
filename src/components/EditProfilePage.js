@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
-import database, { storage } from '../firebase/firebase'
+import database, { storage } from '../utilities/firebase'
 import { startEditProfile } from '../actions/auth'
 import ImageCropper from './ImageCropper'
 
@@ -11,6 +11,7 @@ const EditProfilePage = ({ user, startEditProfile, history }) => {
 	const [inputImg, setInputImg] = useState('')
 	const [isMounted, setIsMounted] = useState(true)
 	const [blob, setBlob] = useState(null)
+	const buttonColor = inputImg ? 'teal' : 'disabled'
 
 	useEffect(() => {
 		setIsMounted(true)
@@ -116,12 +117,10 @@ const EditProfilePage = ({ user, startEditProfile, history }) => {
 							<label>Avatar</label>
 							<input
 								type='file'
+								accept='image/*'
 								onChange={onAviChange}
 							/>
 						</div>
-						<button className='ui teal right floated small submit button' type='submit'>
-							Update
-						</button>
 						{
 							inputImg && (
 								<ImageCropper
@@ -130,6 +129,9 @@ const EditProfilePage = ({ user, startEditProfile, history }) => {
 								/>
 							)
 						}
+						<button className={`ui right floated small submit button ${buttonColor}`} type='submit'>
+							Update
+						</button>
 
 					</form>
 				</div>

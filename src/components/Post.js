@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import database, { storage } from '../firebase/firebase'
+import database, { storage } from '../utilities/firebase'
 import { formatDistanceStrict } from 'date-fns'
 import UserAvatar from './UserAvatar'
 import { startSetImageURL } from '../actions/avatar'
@@ -9,7 +9,6 @@ import { startSetImageURL } from '../actions/avatar'
 const Post = ({ startSetImageURL, title, body, createdAt, id, ownsPost, isViewingProfile, user, avatar, onViewPage }) => {
     const [displayName, setDisplayName] = useState('')
     const [isMounted, setIsMounted] = useState(true)
-    // const [isLoaded, setIsLoaded] = useState(false)
 
     useEffect(() => {
         setIsMounted(true)
@@ -18,8 +17,6 @@ const Post = ({ startSetImageURL, title, body, createdAt, id, ownsPost, isViewin
                 .ref(`users/${user}`)
                 .once('value', (snapshot) => {
                     setDisplayName(snapshot.val().user_info.display_name)
-                    // setIsLoaded(true)
-
                 })
             !avatar && (
                 storage
@@ -28,11 +25,9 @@ const Post = ({ startSetImageURL, title, body, createdAt, id, ownsPost, isViewin
                     .getDownloadURL()
                     .then((url) => {
                         startSetImageURL(user, url)
-                        // setIsLoaded(true)
                     })
                     .catch((error) => {
-                        startSetImageURL(user, 'https://i.imgur.com/DLiQvK4.jpg')
-                        // setIsLoaded(true)
+                        // console.log(error)
                     })
             )
         }
