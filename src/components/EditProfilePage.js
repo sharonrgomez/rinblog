@@ -2,13 +2,15 @@ import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import database, { storage } from '../firebase/firebase'
 import { startEditProfile } from '../actions/auth'
+import ImageCropper from './ImageCropper'
 
 
 const EditProfilePage = ({ user, startEditProfile, history }) => {
 	const [error, setError] = useState('')
 	const [username, setUsername] = useState('')
-	const [avi, setAvi] = useState('')
+	const [inputImg, setInputImg] = useState('')
 	const [isMounted, setIsMounted] = useState(true)
+	const [blob, setBlob] = useState(null)
 
 	useEffect(() => {
 		setIsMounted(true)
@@ -24,12 +26,26 @@ const EditProfilePage = ({ user, startEditProfile, history }) => {
 		return () => setIsMounted(false)
 	}, [user])
 
+	const getBlob = (blob) => {
+		setBlob(blob)
+	}
+
 	const onUsernameChange = (e) => {
 		setUsername(e.target.value)
 	}
 
 	const onAviChange = (e) => {
-		setAvi(e.target.files[0])
+		// convert image file to base64 string
+		const file = e.target.files[0]
+		const reader = new FileReader()
+
+		reader.addEventListener('load', function () {
+			setInputImg(reader.result)
+		}, false)
+
+		if (file) {
+			reader.readAsDataURL(file)
+		}
 	}
 
 	const handleSubmitAvatar = (e) => {
@@ -37,9 +53,9 @@ const EditProfilePage = ({ user, startEditProfile, history }) => {
 		storage
 			.ref(user)
 			.child('display_pic')
-			.put(avi, { contentType: avi.type })
+			.put(blob, { contentType: blob.type })
 			.then(() => {
-				history.push('/me')
+				window.location.href = '/me'
 			})
 
 	}
@@ -106,6 +122,15 @@ const EditProfilePage = ({ user, startEditProfile, history }) => {
 						<button className='ui teal right floated small submit button' type='submit'>
 							Update
 						</button>
+						{
+							inputImg && (
+								<ImageCropper
+									getBlob={getBlob}
+									inputImg={inputImg}
+								/>
+							)
+						}
+
 					</form>
 				</div>
 			</div>
