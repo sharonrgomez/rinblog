@@ -4,7 +4,7 @@ A blogging app that gives you the freedom to unleash your mind.
 
 ## Live Demo
 
-[https://rin-blog.web.app/](https://rin-blog.web.app/)
+[rin-blog.web.app](https://rin-blog.web.app/)
 
 ## Features
 
