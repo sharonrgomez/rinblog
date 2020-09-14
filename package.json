@@ -25,6 +25,7 @@
     "@fortawesome/fontawesome-free": "^5.14.0",
     "@types/jest": "^25.2.3",
     "babel-loader": "^8.1.0",
+    "ckeditor5-simple-upload": "^1.0.7",
     "css-loader": "^3.5.3",
     "date-fns": "^2.16.1",
     "express": "^4.17.1",

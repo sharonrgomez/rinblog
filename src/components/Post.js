@@ -43,11 +43,11 @@ const Post = ({ startSetImageURL, title, body, createdAt, id, ownsPost, isViewin
                 body.length > 500
                 ? (
                     <>
-                        <p className='post-body' dangerouslySetInnerHTML={{__html: body.slice(0, 500) }} />
+                        <p className='post-body' dangerouslySetInnerHTML={{ __html: body.slice(0, 500) }} />
                         <Link to={`/post/${id}`} className='links'>...Read More</Link>
                     </>
                 )
-                : <p className='post-body' dangerouslySetInnerHTML={{__html: body }} />
+                : <p className='post-body' dangerouslySetInnerHTML={{ __html: body }} />
             }
             <div className='ui divider'></div>
             <div className='details'>

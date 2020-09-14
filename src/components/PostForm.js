@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import CKEditor from '@ckeditor/ckeditor5-react'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
+import { config } from '../utilities/editorConfig'
 
 const PostForm = ({ onSubmit, onRemove, post, showRemoveButton, header }) => {
+    ClassicEditor.defaultConfig = config
     const [error, setError] = useState('')
     const [title, setTitle] = useState(post ? post.title : '')
     const [body, setBody] = useState(post ? post.body : '')
@@ -45,14 +47,14 @@ const PostForm = ({ onSubmit, onRemove, post, showRemoveButton, header }) => {
                             id='editor'
                             data={body}
                             editor={ClassicEditor}
-                            onChange={(event, editor) => {
+                            onChange={(_, editor) => {
                                 const data = editor.getData()
                                 setBody(data)
                             }}
                         />
-                        
+
                         <div>
-                            <button className='ui teal right floated small submit button' type='submit'>
+                            <button className='ui right floated small submit button button__main' type='submit'>
                                 {showRemoveButton ? 'Update' : 'Add Post'}
                             </button>
                             {showRemoveButton

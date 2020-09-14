@@ -1,0 +1,12 @@
+.ck.ck-content.ck-editor__editable.ck-rounded-corners.ck-editor__editable_inline {
+	border-radius: 0% 0% 2% 2%;
+	height: 18rem;
+	&.ck-focused {
+		border: 1px solid #85b7d9;
+		box-shadow: none;
+	}
+}
+
+.ck.ck-editor__main {
+	margin-bottom: $xs-size;
+}
