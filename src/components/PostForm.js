@@ -1,14 +1,12 @@
 import React, { useState } from 'react'
+import CKEditor from '@ckeditor/ckeditor5-react'
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 
 const PostForm = ({ onSubmit, onRemove, post, showRemoveButton, header }) => {
     const [error, setError] = useState('')
     const [title, setTitle] = useState(post ? post.title : '')
     const [body, setBody] = useState(post ? post.body : '')
     const createdAt = post ? post.createdAt : Date.now()
-
-    const onBodyChange = (e) => {
-        setBody(e.target.value)
-    }
 
     const onTitleChange = (e) => {
         setTitle(e.target.value)
@@ -42,16 +40,17 @@ const PostForm = ({ onSubmit, onRemove, post, showRemoveButton, header }) => {
                                 autoFocus
                             />
                         </div>
-                        <div className='field'>
-                            <label>Body</label>
-                            <textarea
-                                placeholder='body'
-                                cols='30'
-                                rows='15'
-                                value={body}
-                                onChange={onBodyChange}>
-                            </textarea>
-                        </div>
+
+                        <CKEditor
+                            id='editor'
+                            data={body}
+                            editor={ClassicEditor}
+                            onChange={(event, editor) => {
+                                const data = editor.getData()
+                                setBody(data)
+                            }}
+                        />
+                        
                         <div>
                             <button className='ui teal right floated small submit button' type='submit'>
                                 {showRemoveButton ? 'Update' : 'Add Post'}

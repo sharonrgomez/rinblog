@@ -9,7 +9,6 @@
     "dev-server": "webpack-dev-server",
     "start": "node server/server.js",
     "deploy": "yarn run build:prod && firebase deploy"
-
   },
   "author": "Sharon Levin",
   "license": "ISC",
@@ -21,6 +20,8 @@
     "@babel/polyfill": "^7.10.1",
     "@babel/preset-env": "^7.9.6",
     "@babel/preset-react": "^7.9.4",
+    "@ckeditor/ckeditor5-build-classic": "^22.0.0",
+    "@ckeditor/ckeditor5-react": "^2.1.0",
     "@fortawesome/fontawesome-free": "^5.14.0",
     "@types/jest": "^25.2.3",
     "babel-loader": "^8.1.0",
@@ -36,6 +37,7 @@
     "react": "^16.13.1",
     "react-addons-shallow-compare": "^15.6.2",
     "react-dom": "^16.13.1",
+    "react-easy-crop": "^3.1.1",
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.2.0",
     "redux": "^4.0.5",
