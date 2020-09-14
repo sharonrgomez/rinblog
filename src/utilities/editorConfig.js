@@ -11,6 +11,8 @@ export const config = {
 			'|',
 			'heading',
 			'|',
+			'imageUpload',
+			'|',
 			'undo',
 			'redo'
 		]

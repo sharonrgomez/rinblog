@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
+import { connect } from 'react-redux'
 import CKEditor from '@ckeditor/ckeditor5-react'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
+import MyUploadAdapter from './UploadAdapter'
 import { config } from '../utilities/editorConfig'
 
-const PostForm = ({ onSubmit, onRemove, post, showRemoveButton, header }) => {
+const PostForm = ({ onSubmit, onRemove, post, showRemoveButton, header, user }) => {
     ClassicEditor.defaultConfig = config
     const [error, setError] = useState('')
     const [title, setTitle] = useState(post ? post.title : '')
@@ -46,6 +48,12 @@ const PostForm = ({ onSubmit, onRemove, post, showRemoveButton, header }) => {
                         <CKEditor
                             id='editor'
                             data={body}
+                            onInit={(editor) => {
+                                editor.plugins.get("FileRepository")
+                                    .createUploadAdapter = (loader) => {
+                                        return new MyUploadAdapter(loader, user)
+                                    }
+                            }}
                             editor={ClassicEditor}
                             onChange={(_, editor) => {
                                 const data = editor.getData()
@@ -75,4 +83,8 @@ const PostForm = ({ onSubmit, onRemove, post, showRemoveButton, header }) => {
     )
 }
 
-export default PostForm
+const mapStateToProps = (state) => ({
+    user: state.auth.uid
+})
+
+export default connect(mapStateToProps)(PostForm)
