@@ -4,7 +4,7 @@ A blogging app that gives you the freedom to unleash your mind.
 
 ## Live Demo
 
-[https://rin-blog.web.app/](https://rin-blog.web.app/)
+[rin-blog.web.app](https://rin-blog.web.app/)
 
 ## Features
 
@@ -45,5 +45,4 @@ A blogging app that gives you the freedom to unleash your mind.
 
 * Let user edit their email/password
 * Let user delete their account
-* Crop/compress uploaded images
 * Let users 'like' each others posts
