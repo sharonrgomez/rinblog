@@ -13,7 +13,6 @@ const PostList = ({ startSetAllPosts, startSetPosts, startSetImageURL, getAllPos
 	const [displayName, setDisplayName] = useState('')
 	const [isMounted, setIsMounted] = useState(true)
 	const [isLoaded, setIsLoaded] = useState(false)
-	const defaultAvatar = 'https://i.imgur.com/DLiQvK4.jpg'
 
 	useEffect(() => {
 		setIsMounted(true)

@@ -20,11 +20,12 @@
 	.header {
 		word-wrap: break-word;
 		font-size: $l-size;
+		color: $accent;
 		a {
 			color: $accent;
-		}
-		a:hover {
-			color: $accent-alt;
+			&:hover {
+				color: $accent-alt;
+			}
 		}
 	}
 	.post-body {

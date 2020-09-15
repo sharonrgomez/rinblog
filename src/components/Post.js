@@ -38,9 +38,15 @@ const Post = ({ startSetImageURL, title, body, createdAt, id, ownsPost, isViewin
         <article id='post-list__post' className='ui container clearing raised segment'>
             <div>
                 <div className='ui large header'>
-                    <Link to={`/post/${id}`}>
-                        {title}
-                    </Link>
+                    {
+                        onViewPage
+                            ? title
+                            : (
+                                <Link to={`/post/${id}`}>
+                                    {title}
+                                </Link>
+                            )
+                    }
                 </div>
                 {!onViewPage &&
                     body.length > 800
