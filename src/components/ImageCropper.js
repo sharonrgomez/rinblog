@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react'
+import React, { useState } from 'react'
 import Cropper from 'react-easy-crop'
 import getCroppedImg from '../utilities/cropImage'
 
