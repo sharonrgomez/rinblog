@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Cropper from 'react-easy-crop'
-import getCroppedImg from '../utilities/cropImage'
+import { getCroppedImg } from '../utilities/cropImage'
 
 const ImageCropper = ({ getBlob, inputImg }) => {
 	const [crop, setCrop] = useState({ x: 0, y: 0 })

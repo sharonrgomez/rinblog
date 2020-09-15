@@ -7,11 +7,11 @@ const createImage = (url) =>
 		image.src = url
 	})
 
-export default async function getCroppedImg(imageSrc, crop) {
+export const getCroppedImg = async (imageSrc, crop) => {
 	const image = await createImage(imageSrc)
 	const canvas = document.createElement('canvas')
 	const ctx = canvas.getContext('2d')
-	
+
 	canvas.width = 150
 	canvas.height = 150
 
