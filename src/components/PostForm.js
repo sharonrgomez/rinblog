@@ -61,18 +61,18 @@ const PostForm = ({ onSubmit, onRemove, post, showRemoveButton, header, user }) 
                             }}
                         />
 
-                        <div>
+                        <div id='button'>
                             <button className='ui right floated small submit button button__main' type='submit'>
                                 {showRemoveButton ? 'Update' : 'Add Post'}
                             </button>
                             {showRemoveButton
                                 &&
                                 <button
-                                    className='ui right floated small button'
+                                    className='ui right floated small button button__remove'
                                     onClick={onRemove}
                                     type='button'
                                 >
-                                    Remove Post
+                                    Delete Post
                                 </button>
                             }
                         </div>

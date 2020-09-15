@@ -1,3 +1,10 @@
-.button__main{
-	background: $pop;
+#button {
+	.button__main {
+		background: $accent;
+		color: white;
+	}
+	.button__remove {
+		background: #ff6666;
+		color: white;
+	}
 }

@@ -11,7 +11,7 @@ const EditProfilePage = ({ user, startEditProfile, history }) => {
 	const [inputImg, setInputImg] = useState('')
 	const [isMounted, setIsMounted] = useState(true)
 	const [blob, setBlob] = useState(null)
-	const buttonColor = inputImg ? 'teal' : 'disabled'
+	const buttonColor = inputImg ? 'button__main' : 'disabled'
 
 	useEffect(() => {
 		setIsMounted(true)
@@ -82,7 +82,7 @@ const EditProfilePage = ({ user, startEditProfile, history }) => {
 						startEditProfile({
 							display_name: username
 						})
-						history.push('/')
+						history.push('/me')
 					} else {
 						setError('That username already exists.')
 					}
@@ -108,10 +108,14 @@ const EditProfilePage = ({ user, startEditProfile, history }) => {
 								autoFocus
 							/>
 						</div>
-						<button className='ui teal right floated small submit button' type='submit'>
-							Update
-						</button>
+
+						<div id='button'>
+							<button className='ui right floated small submit button button__main' type='submit'>
+								Update
+							</button>
+						</div>
 					</form>
+
 					<form className='form' onSubmit={handleSubmitAvatar}>
 						<div className='field'>
 							<label>Avatar</label>
@@ -129,10 +133,11 @@ const EditProfilePage = ({ user, startEditProfile, history }) => {
 								/>
 							)
 						}
-						<button className={`ui right floated small submit button ${buttonColor}`} type='submit'>
-							Update
-						</button>
-
+						<div id='button'>
+							<button className={`ui right floated small submit button ${buttonColor}`} type='submit'>
+								Update
+							</button>
+						</div>
 					</form>
 				</div>
 			</div>

@@ -36,33 +36,39 @@ const Post = ({ startSetImageURL, title, body, createdAt, id, ownsPost, isViewin
 
     return (
         <article id='post-list__post' className='ui container clearing raised segment'>
-            <div className='ui large header'>
-                {title}
+            <div>
+                <div className='ui large header'>
+                    <Link to={`/post/${id}`}>
+                        {title}
+                    </Link>
+                </div>
+                {!onViewPage &&
+                    body.length > 800
+                    ? (
+                        <>
+                            <p className='post-body' dangerouslySetInnerHTML={{ __html: body.slice(0, 800) }} />
+                            <Link to={`/post/${id}`} className='links'>...Read More</Link>
+                        </>
+                    )
+                    : <p className='post-body' dangerouslySetInnerHTML={{ __html: body }} />
+                }
             </div>
-            {!onViewPage &&
-                body.length > 500
-                ? (
-                    <>
-                        <p className='post-body' dangerouslySetInnerHTML={{ __html: body.slice(0, 500) }} />
-                        <Link to={`/post/${id}`} className='links'>...Read More</Link>
-                    </>
-                )
-                : <p className='post-body' dangerouslySetInnerHTML={{ __html: body }} />
-            }
-            <div className='ui divider'></div>
-            <div className='details'>
-                {/* if post belongs to current user, show edit link.
+            <div>
+                <div className='ui divider'></div>
+                <div className='details'>
+                    {/* if post belongs to current user, show edit link.
                     if not, show username. 
                 on profile pages, do not show either. */}
-                {
-                    ownsPost
-                        ? <Link to={`/edit/${id}`} className='links'>Edit</Link>
-                        : !isViewingProfile &&
-                        <Link to={`/user/${user}`} className='links'>
-                            <UserAvatar src={avatar} username={displayName} isCurrentUser={false} /><span>@{displayName}</span>
-                        </Link>
-                }
-                <div className='date'>{formatDistanceStrict(createdAt, Date.now())} ago</div>
+                    {
+                        ownsPost
+                            ? <Link to={`/edit/${id}`} className='links'>Edit</Link>
+                            : !isViewingProfile &&
+                            <Link to={`/user/${user}`} className='links'>
+                                <UserAvatar src={avatar} username={displayName} isCurrentUser={false} /><span>@{displayName}</span>
+                            </Link>
+                    }
+                    <div className='date'>{formatDistanceStrict(createdAt, Date.now())} ago</div>
+                </div>
             </div>
         </article >
     )
