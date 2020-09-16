@@ -7,8 +7,6 @@ import { config } from '../utilities/editorConfig'
 
 const PostForm = ({ onSubmit, onRemove, post, showRemoveButton, header, user }) => {
     ClassicEditor.defaultConfig = config
-    ClassicEditor.extraPlugins = 'codesnippet'
-
     const [error, setError] = useState('')
     const [title, setTitle] = useState(post ? post.title : '')
     const [body, setBody] = useState(post ? post.body : '')

@@ -9,6 +9,7 @@ export const config = {
 			'indent',
 			'outdent',
 			'|',
+			'blockQuote',
 			'heading',
 			'|',
 			'imageUpload',

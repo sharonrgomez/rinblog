@@ -38,6 +38,19 @@
 				max-width: 100%;
 			}
 		}
+		blockquote {
+			overflow-x: scroll;
+			white-space: nowrap;
+			padding-right: 1.5em;
+			padding-left: 1.5em;
+			color: white;
+			margin-left: 0;
+			margin-right: 0;
+			border-radius: 7px;
+			background: #222231;
+			padding: 1.5rem;
+			font-family: monospace;
+		}
 	}
 	.divider {
 		margin: $m-size 0 $xxs-size 0;
@@ -63,4 +76,17 @@
 		justify-content: center;
 		align-items: center;
 	}
+}
+// @mixin codeblock() {
+// 	color: white;
+// }
+.ck-content blockquote {
+	color: white;
+	border-radius: 7px;
+	background: #222231;
+	border-left: none !important;
+	font-style: inherit !important;
+	font-family: monospace;
+	padding: 1.5rem !important;
+	// @mixin codeblock()
 }
