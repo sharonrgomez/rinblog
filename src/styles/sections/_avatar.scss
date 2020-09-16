@@ -18,15 +18,17 @@
 
 // avatar on profile pages
 .content-container .ui.large.header .display-pic__container {
-	width: $xl-size;
-	height: $xl-size;
+	width: 12rem;
+	height: 12rem;
 	border-radius: 50%;
+	margin-left: 0;
 	flex-shrink: 0;
-	margin-left: $xs-size;
 	overflow: hidden;
-	@media (min-width: 450px) {
-		width: $xxl-size;
-		height: $xxl-size;
+	margin-left: $xs-size;
+	@media (min-width: $mobile-breakpt) {
+		width: 10rem;
+		height: 10rem;
+		margin-left: $xs-size;
 	}
 	.display-pic {
 		max-width: 100%;

@@ -12,8 +12,8 @@ export const getCroppedImg = async (imageSrc, crop) => {
 	const canvas = document.createElement('canvas')
 	const ctx = canvas.getContext('2d')
 
-	canvas.width = 150
-	canvas.height = 150
+	canvas.width = 250
+	canvas.height = 250
 
 	ctx.drawImage(
 		image,

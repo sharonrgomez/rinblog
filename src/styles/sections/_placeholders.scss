@@ -22,13 +22,13 @@
 	}
 	.placeholder__square {
 		display: inline-block;
-		width: $xl-size;
+		width: 12rem;
 		border-radius: 50%;
 		overflow: hidden;
 		margin-bottom: 1rem;
-		@media (min-width: $sm-mobile-breakpt) {
-			width: $xxl-size;
-			height: $xxl-size;
+		@media (min-width: $mobile-breakpt) {
+			width: 10rem;
+			height: 10rem;
 		}
 	}
 }

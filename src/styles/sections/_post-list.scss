@@ -19,6 +19,11 @@
 	&:last-child {
 		margin-bottom: $s-size;
 	}
+	&:first-child {
+		@media (min-width: $sm-mobile-breakpt) {
+			margin-top: $s-size;
+		}
+	}
 	.header {
 		word-wrap: break-word;
 		font-size: $l-size;
