@@ -1,5 +1,5 @@
 .ck.ck-content.ck-editor__editable.ck-rounded-corners.ck-editor__editable_inline {
-	border-radius: 0% 0% 2% 2%;
+	border-radius: 0 0 5px 5px;
 	height: 18rem;
 	&.ck-focused {
 		border: 1px solid #85b7d9;
@@ -9,4 +9,14 @@
 
 .ck.ck-editor__main {
 	margin-bottom: $xs-size;
+}
+
+.ck-content blockquote {
+	color: white;
+	border-radius: 7px;
+	background: #222231;
+	border-left: none !important;
+	font-style: inherit !important;
+	font-family: monospace;
+	padding: 1.5rem !important;
 }
