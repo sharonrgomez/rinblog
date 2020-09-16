@@ -3,7 +3,7 @@
 	flex-direction: column;
 	word-break: break-word;
 	.links {
-		line-height: 2rem;
+		line-height: $m-size;
 		text-align: center;
 		font-size: $xs-size;
 		@media (min-width: $mobile-breakpt) {
@@ -13,7 +13,9 @@
 }
 
 #post-list__post {
-	padding-bottom: $xxs-size;
+	@media (max-width: $tablet-breakpt) {
+		padding: 0.8rem 0.8rem $xxs-size 0.8rem;
+	}
 	&:last-child {
 		margin-bottom: $s-size;
 	}
@@ -29,7 +31,7 @@
 		}
 	}
 	.post-body {
-		margin: 1em 0 0.5em;
+		margin: $xs-size 0 $xxs-size;
 		word-wrap: break-word;
 		white-space: pre-wrap;
 		.image {
@@ -41,15 +43,14 @@
 		blockquote {
 			overflow-x: scroll;
 			white-space: nowrap;
-			padding-right: 1.5em;
-			padding-left: 1.5em;
 			color: white;
 			margin-left: 0;
 			margin-right: 0;
 			border-radius: 7px;
 			background: #222231;
-			padding: 1.5rem;
+			padding: 1rem 1rem 0.6rem 1rem;
 			font-family: monospace;
+			font-size: 0.8rem;
 		}
 	}
 	.divider {
