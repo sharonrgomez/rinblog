@@ -2,9 +2,11 @@
 A blogging app that gives you the freedom to unleash your mind.
 **In progress!!**
 
+<img width="1512" alt="Screenshot 2024-04-15 at 12 16 09 PM (2)" src="https://github.com/sharonrgomez/rinblog/assets/22580495/fa683bfb-98ef-4f89-9c24-947c1e26e10d">
+
 ## Live Demo
 
-[rin-blog.web.app](https://rin-blog.web.app/)
+[https://rinblog.sharongomez.com/](https://rinblog.sharongomez.com/)
 
 ## Features
 
